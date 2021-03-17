@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import "./App.css";
+import "./App.scss";
 
 const App: FC = () => {
   return (
