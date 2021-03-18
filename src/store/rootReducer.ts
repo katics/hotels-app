@@ -1,5 +1,9 @@
 import { combineReducers } from "redux";
 
-const hotelsRootReducer = combineReducers({});
+import hotelReducer from "./hotel/hotelReducer";
+
+const hotelsRootReducer = combineReducers({
+  hotelReducer,
+});
 
 export default hotelsRootReducer;
