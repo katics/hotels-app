@@ -1,40 +1,31 @@
 import { FC, useState } from "react";
-import { connect } from "react-redux";
+import store from "../store";
+import hotelReducer from "../store/hotel/hotelReducer";
 
-import { addHotel } from "../store/hotel/hotelActions";
-import { IHotel } from "../utils/types/Hotel";
-import { IHotels } from "../utils/types/Hotels";
+import hotelsSelector from "../store/hotel/hotelSelector";
+import HotelProvider, {
+  useDispatchHotel,
+  useSelectorHotel,
+  hotelContext,
+} from "../store/HotelProider";
 
 import "./App.scss";
 
-const mapStateToProps = (hotel: IHotels) => {
-  const { listOfHotels } = hotel;
-  return { listOfHotels };
-};
+const AppPage: FC = () => (
+  <HotelProvider store={store} context={hotelContext}>
+    <App />
+  </HotelProvider>
+);
 
-const mapDispatcherToProps = (dispatch: any) => {
-  return {
-    addHotel: (hotel: IHotel) => dispatch(addHotel(hotel)),
-  };
-};
+const App: FC = () => {
+  // const userDispatch = useDispatchHotel();
+  const listOfHotels = useSelectorHotel(hotelsSelector);
+  console.log(listOfHotels);
 
-type ReduxType = ReturnType<typeof mapStateToProps> &
-  ReturnType<typeof mapDispatcherToProps>;
-
-const App: FC<ReduxType> = props => {
-  const { listOfHotels } = props;
   const [hotel, setHotel] = useState({ name: "" });
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHotel({ name: e.target.value });
-  };
-
-  const onAddClick = () => {
-    // const newHotel: IHotel = {
-    //   name: ,
-    // };
-    // props.addHotel(newHotel);
-    // setHotel(newHotel);
   };
 
   return (
@@ -45,14 +36,14 @@ const App: FC<ReduxType> = props => {
         value={hotel.name}
         onChange={onInputChange}
       />
-      <button onClick={onAddClick}>Add</button>
-      <ul>
-        {listOfHotels.map(hotel => (
-          <li key={hotel.name}>{hotel.name}</li>
+
+      {/* <ul>
+        {listOfHotels.map(name => (
+          <li key={name}>{name}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps)(App);
+export default AppPage;

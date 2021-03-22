@@ -1,5 +1,5 @@
-import { IHotel } from "./Hotel";
+import { Hotel } from "./Hotel";
 
-export interface IHotels {
-  listOfHotels: IHotel[];
+export interface Hotels {
+  listOfHotels: string[];
 }
