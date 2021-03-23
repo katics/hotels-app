@@ -1,16 +1,24 @@
 import { ADD_HOTEL } from "./hotelActionTypes";
-import { Hotels } from "../../utils/types/Hotels";
-import { HotelState } from "../HotelProider";
+import { HotelStore } from "../HotelProider";
 
-const initialState: HotelState = {
-  hotels: { listOfHotels: ["Hotel Park"] },
-  // hotels: { listOfHotels: [{ name: "Hotel Park" }] },
-}; //{ listOfHotels: [{ name: "Hotel Park" }] };
+const initialState: HotelStore = {
+  hotels: { listOfHotels: [{ name: "Hotel Park" }] },
+};
 
-const hotelReducer = (state = initialState, action: any = {}): any => {
+const hotelReducer = (
+  state: HotelStore = initialState,
+  action: any = {}
+): HotelStore => {
   switch (action.type) {
     case ADD_HOTEL:
-      return { ...state, ...action.hotel };
+      return {
+        hotels: {
+          listOfHotels: [
+            ...state.hotels.listOfHotels,
+            { name: action.hotel.name },
+          ],
+        },
+      };
     default:
       return state;
   }

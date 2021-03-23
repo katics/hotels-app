@@ -1,9 +1,10 @@
-import { clear } from "node:console";
 import { Hotels } from "../../utils/types/Hotels";
-import { HotelState } from "../HotelProider";
+import { HotelStore } from "../HotelProider";
 
-const hotelsSelector = (state: HotelState): Hotels => {
-  return state.hotels;
+export const hotelsSelector = (state: any): any => {
+  return state.hotelReducer.hotels;
 };
-
-export default hotelsSelector;
+const allHotelsSelectors = {
+  hotelsSelector,
+};
+export default allHotelsSelectors;

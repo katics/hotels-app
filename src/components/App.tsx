@@ -1,15 +1,16 @@
 import { FC, useState } from "react";
-import store from "../store";
-import hotelReducer from "../store/hotel/hotelReducer";
 
-import hotelsSelector from "../store/hotel/hotelSelector";
+import store from "../store";
+import { hotelsSelector } from "../store/hotel/hotelSelector";
 import HotelProvider, {
   useDispatchHotel,
   useSelectorHotel,
   hotelContext,
 } from "../store/HotelProider";
+import { addHotel } from "../store/hotel/hotelActions";
 
 import "./App.scss";
+import { Hotel } from "../utils/types/Hotel";
 
 const AppPage: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -18,14 +19,21 @@ const AppPage: FC = () => (
 );
 
 const App: FC = () => {
-  // const userDispatch = useDispatchHotel();
-  const listOfHotels = useSelectorHotel(hotelsSelector);
+  const { listOfHotels } = useSelectorHotel(hotelsSelector);
   console.log(listOfHotels);
+  const hotelDispatch = useDispatchHotel();
 
-  const [hotel, setHotel] = useState({ name: "" });
+  const hotelsta: Hotel = { name: "" };
+  const [hotel, setHotel] = useState(hotelsta);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     setHotel({ name: e.target.value });
+  };
+
+  const onAddClick = () => {
+    hotelDispatch(addHotel(hotel));
+    setHotel({ name: "" });
   };
 
   return (
@@ -36,12 +44,12 @@ const App: FC = () => {
         value={hotel.name}
         onChange={onInputChange}
       />
-
-      {/* <ul>
-        {listOfHotels.map(name => (
-          <li key={name}>{name}</li>
+      <button onClick={onAddClick}>Add Hotel</button>
+      <ul>
+        {listOfHotels.map((hotel: Hotel) => (
+          <li key={hotel.name}>{hotel.name}</li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };
