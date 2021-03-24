@@ -6,11 +6,12 @@ import HotelProvider, {
   useDispatchHotel,
   useSelectorHotel,
   hotelContext,
-} from "../store/HotelProider";
+} from "../store/HotelProvider";
 import { addHotel } from "../store/hotel/hotelActions";
 
 import "./App.scss";
 import { Hotel } from "../utils/types/Hotel";
+import { Hotels } from "../utils/types/Hotels";
 
 const AppPage: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -19,6 +20,7 @@ const AppPage: FC = () => (
 );
 
 const App: FC = () => {
+  console.log(useSelectorHotel(hotelsSelector));
   const { listOfHotels } = useSelectorHotel(hotelsSelector);
   console.log(listOfHotels);
   const hotelDispatch = useDispatchHotel();
@@ -46,9 +48,10 @@ const App: FC = () => {
       />
       <button onClick={onAddClick}>Add Hotel</button>
       <ul>
-        {listOfHotels.map((hotel: Hotel) => (
-          <li key={hotel.name}>{hotel.name}</li>
-        ))}
+        {listOfHotels &&
+          listOfHotels.map((hotel: Hotel) => (
+            <li key={hotel.name}>{hotel.name}</li>
+          ))}
       </ul>
     </div>
   );

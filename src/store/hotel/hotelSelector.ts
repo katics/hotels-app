@@ -1,8 +1,8 @@
 import { Hotels } from "../../utils/types/Hotels";
-import { HotelStore } from "../HotelProider";
+import { HotelState } from "../HotelProvider";
 
-export const hotelsSelector = (state: any): any => {
-  return state.hotelReducer.hotels;
+export const hotelsSelector = (state: HotelState): Hotels => {
+  return state.hotels;
 };
 const allHotelsSelectors = {
   hotelsSelector,

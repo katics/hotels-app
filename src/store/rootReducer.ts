@@ -1,9 +1,9 @@
 import { combineReducers, Reducer } from "redux";
 
-import hotelReducer from "./hotel/hotelReducer";
+import hotels from "./hotel/hotelReducer";
 
 const appReducer = combineReducers({
-  hotelReducer,
+  hotels,
 });
 
 const rootReducer: Reducer = (state, action: any) => appReducer(state, action);

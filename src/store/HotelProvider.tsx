@@ -1,15 +1,15 @@
 import { createContext, FC } from "react";
 import { createDispatchHook, createSelectorHook, Provider } from "react-redux";
-
-import { Hotels } from "../utils/types/Hotels";
 import { AnyAction, Store } from "redux";
 
-export interface HotelStore {
+import { Hotels } from "../utils/types/Hotels";
+
+export interface HotelState {
   hotels: Hotels;
 }
 
 interface ContextProps {
-  state: HotelStore;
+  state: HotelState;
   dispatch: ({ type }: { type: string }) => void;
 }
 
@@ -26,7 +26,7 @@ interface Props {
 }
 const HotelProvider: FC<Props> = ({ store, context, ...props }) => (
   <Provider
-    store={store as Store<HotelStore, AnyAction>}
+    store={store as Store<HotelState, AnyAction>}
     context={context}
     {...props}
   />
