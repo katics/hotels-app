@@ -1,26 +1,24 @@
 import { FC, useState } from "react";
 
-import store from "../store";
-import { hotelsSelector } from "../store/hotel/hotelSelector";
+import store from "../../../store";
+import { hotelsSelector } from "../../../store/hotel/hotelSelector";
 import HotelProvider, {
   useDispatchHotel,
   useSelectorHotel,
   hotelContext,
-} from "../store/HotelProvider";
-import { addHotel } from "../store/hotel/hotelActions";
+} from "../../../store/HotelProvider";
+import { addHotel } from "../../../store/hotel/hotelActions";
 
-import "./App.scss";
-import { Hotel } from "../utils/types/Hotel";
-import { Hotels } from "../utils/types/Hotels";
+import "./Hotels.scss";
+import { Hotel } from "../../../utils/types/Hotel";
 
-const AppPage: FC = () => (
+const HotelsPage: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
-    <App />
+    <Hotels />
   </HotelProvider>
 );
 
-const App: FC = () => {
-  console.log(useSelectorHotel(hotelsSelector));
+const Hotels: FC = () => {
   const { listOfHotels } = useSelectorHotel(hotelsSelector);
   console.log(listOfHotels);
   const hotelDispatch = useDispatchHotel();
@@ -48,13 +46,12 @@ const App: FC = () => {
       />
       <button onClick={onAddClick}>Add Hotel</button>
       <ul>
-        {listOfHotels &&
-          listOfHotels.map((hotel: Hotel) => (
-            <li key={hotel.name}>{hotel.name}</li>
-          ))}
+        {listOfHotels.map((hotel: Hotel) => (
+          <li key={hotel.name}>{hotel.name}</li>
+        ))}
       </ul>
     </div>
   );
 };
 
-export default AppPage;
+export default HotelsPage;
