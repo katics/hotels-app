@@ -3,9 +3,11 @@ import { createDispatchHook, createSelectorHook, Provider } from "react-redux";
 import { AnyAction, Store } from "redux";
 
 import { Hotels } from "../utils/types/Hotels";
+import { User } from "../utils/types/User";
 
 export interface HotelState {
   hotels: Hotels;
+  user: User;
 }
 
 interface ContextProps {
