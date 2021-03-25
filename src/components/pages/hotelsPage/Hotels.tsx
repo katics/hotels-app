@@ -20,7 +20,6 @@ const HotelsPage: FC = () => (
 
 const Hotels: FC = () => {
   const { listOfHotels } = useSelectorHotel(hotelsSelector);
-  console.log(listOfHotels);
   const hotelDispatch = useDispatchHotel();
 
   const hotelsta: Hotel = { name: "" };
