@@ -10,6 +10,10 @@ const initialState: User = {
     password: "123456",
     confirmPassword: "123456",
   },
+  userLoginData: {
+    userName: "katics",
+    password: "123456",
+  },
 };
 
 const user = (state = initialState, action: any = {}): User => {

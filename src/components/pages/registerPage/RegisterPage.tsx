@@ -1,9 +1,8 @@
 import { FC } from "react";
 
 import store from "../../../store";
-import { userSeletor } from "../../../store/user/userSelector";
+import { userSeletor } from "../../../store/appSelector";
 import HotelProvider, {
-  useDispatchHotel,
   useSelectorHotel,
   hotelContext,
 } from "../../../store/HotelProvider";

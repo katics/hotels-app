@@ -1,12 +1,13 @@
 import { FC, useState } from "react";
 
 import store from "../../../store";
-import { hotelsSelector } from "../../../store/hotel/hotelSelector";
+import { hotelsSelector } from "../../../store/appSelector";
 import HotelProvider, {
   useDispatchHotel,
   useSelectorHotel,
   hotelContext,
 } from "../../../store/HotelProvider";
+
 import { addHotel } from "../../../store/hotel/hotelActions";
 
 import "./Hotels.scss";

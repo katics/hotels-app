@@ -1,7 +1,21 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
+import store from "../../../store";
+import HotelProvider, {
+  hotelContext,
+  useSelectorHotel,
+} from "../../../store/HotelProvider";
+import { userSeletor } from "../../../store/appSelector";
 
-const LoginPage: FC = () => {
+const LoginPage: FC = () => (
+  <HotelProvider store={store} context={hotelContext}>
+    <UserLogin />
+  </HotelProvider>
+);
+
+const UserLogin: FC = () => {
+  const { userLoginData } = useSelectorHotel(userSeletor);
+  console.log(userLoginData);
   return (
     <div className="col-md-6 login-container">
       <div className="card login-form">
@@ -10,10 +24,11 @@ const LoginPage: FC = () => {
           <div className="card-text">
             <form>
               <div className="form-group">
-                <label>Email address</label>
+                <label>User name</label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control form-control-sm"
+                  value={userLoginData.userName}
                 ></input>
               </div>
               <div className="form-group">
@@ -21,7 +36,8 @@ const LoginPage: FC = () => {
                 <input
                   type="password"
                   className="form-control form-control-sm"
-                  id="exampleInputPassword1"
+                  id="input-password"
+                  value={userLoginData.password}
                 />
               </div>
               <button type="submit" className="btn btn-primary btn-block">
