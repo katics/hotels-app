@@ -1,12 +1,12 @@
 import { AnyAction } from "redux";
 import { User } from "../../utils/types/User";
-import { UserData } from "../../utils/types/UserData";
 import { UserLoginData } from "../../utils/types/UserLoginData";
 import { UserRegistrationData } from "../../utils/types/UserRegistrationData";
 import {
   FETCH_LOGIN_USER,
   FETCH_LOGIN_USER_ERROR,
   FETCH_LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
   REGISTER_USER,
 } from "./userActionTypes";
 
@@ -20,10 +20,14 @@ export const fetchLoginUser = (userLoginData: UserLoginData): AnyAction => ({
   payload: userLoginData,
 });
 
-export const fetchLoginUserSuccess = (currentUser: User) => ({
+export const fetchLoginUserSuccess = (currentUser: User): AnyAction => ({
   type: FETCH_LOGIN_USER_SUCCESS,
   payload: currentUser,
 });
-export const fetchloginUserError = () => ({
+export const fetchloginUserError = (): AnyAction => ({
   type: FETCH_LOGIN_USER_ERROR,
+});
+
+export const logoutUser = (): AnyAction => ({
+  type: LOGOUT_USER,
 });

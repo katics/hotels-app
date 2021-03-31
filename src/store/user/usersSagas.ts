@@ -6,11 +6,7 @@ import { getTokenAPI } from "../../utils/api";
 export function* getUserToken(action: any): any {
   try {
     const response = yield call(getTokenAPI, action.payload);
-    if (response) {
-      yield put(fetchLoginUserSuccess(response.data));
-    } else {
-      console.log(response);
-    }
+    yield put(fetchLoginUserSuccess(response.data));
   } catch (err) {
     console.log("ERROR: " + err);
   }

@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router";
 
 import store from "../../../store";
 import HotelProvider, {
@@ -20,7 +21,14 @@ const LoginPage: FC = () => (
 
 const UserLogin: FC = () => {
   const userDispatch = useDispatchHotel();
-  const { isLoggedIn, currentUser } = useSelectorHotel(userSeletor);
+  const { currentUser } = useSelectorHotel(userSeletor);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (currentUser.token) {
+      history.push(AppRoutes.hotels);
+    }
+  }, [currentUser.token]);
 
   const userLoginData: UserLoginData = { username: "", password: "" };
   const [loginData, setLoginData] = useState(userLoginData);
@@ -48,7 +56,6 @@ const UserLogin: FC = () => {
     <div className="col-md-6 login-container">
       <div className="card login-form">
         <div className="card-body">
-          <h2>User Name: {currentUser.username}</h2>
           <h3 className="card-title text-center">Log in</h3>
           <div className="card-text">
             <form onSubmit={signInClick}>
@@ -77,7 +84,7 @@ const UserLogin: FC = () => {
                 Sign in
               </button>
               <div className="sign-up">
-                Don't have an account?{" "}
+                Don't have an account?
                 <NavLink className="float-right" to={AppRoutes.register}>
                   Register
                 </NavLink>
