@@ -1,23 +1,20 @@
-import { FC } from "react";
-
-import store from "../../../store";
-import { userSeletor } from "../../../store/appSelector";
-import HotelProvider, {
-  useSelectorHotel,
-  hotelContext,
-} from "../../../store/HotelProvider";
-
+import { FC, useState } from "react";
+import { UserRegistrationData } from "../../../utils/types/UserRegistrationData";
 import "./RegisterPage";
 
-const UserRegistrationPage: FC = () => (
-  <HotelProvider store={store} context={hotelContext}>
-    <UserRegistration />
-  </HotelProvider>
-);
+const UserRegistrationPage: FC = () => {
+  const userRegistrationData: UserRegistrationData = {
+    userName: "",
+    firstName: "",
+    password: "",
+    confirmPassword: "",
+    lastName: "",
+    email: "",
+  };
 
-const UserRegistration: FC = () => {
-  const { userRegistrationData } = useSelectorHotel(userSeletor);
-  console.log(userRegistrationData);
+  const [registrationData, setRegistrationData] = useState(
+    userRegistrationData
+  );
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -32,7 +29,10 @@ const UserRegistration: FC = () => {
                     type="text"
                     className="form-control"
                     id="user-name"
-                    value={userRegistrationData.userName}
+                    value={registrationData.userName}
+                    onChange={e => {
+                      setRegistrationData({ userName: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -41,7 +41,10 @@ const UserRegistration: FC = () => {
                     type="text"
                     className="form-control"
                     id="name"
-                    value={userRegistrationData.firstName}
+                    value={registrationData.firstName}
+                    onChange={e => {
+                      setRegistrationData({ firstName: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -50,7 +53,10 @@ const UserRegistration: FC = () => {
                     type="text"
                     className="form-control"
                     id="last-name"
-                    value={userRegistrationData.lastName}
+                    value={registrationData.lastName}
+                    onChange={e => {
+                      setRegistrationData({ lastName: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -59,7 +65,10 @@ const UserRegistration: FC = () => {
                     type="email"
                     className="form-control"
                     id="email"
-                    value={userRegistrationData.email}
+                    value={registrationData.email}
+                    onChange={e => {
+                      setRegistrationData({ email: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -68,7 +77,10 @@ const UserRegistration: FC = () => {
                     type="password"
                     className="form-control"
                     id="password"
-                    value={userRegistrationData.password}
+                    value={registrationData.password}
+                    onChange={e => {
+                      setRegistrationData({ password: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -77,7 +89,10 @@ const UserRegistration: FC = () => {
                     type="password"
                     className="form-control"
                     id="confirm-password"
-                    value={userRegistrationData.confirmPassword}
+                    value={registrationData.confirmPassword}
+                    onChange={e => {
+                      setRegistrationData({ confirmPassword: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="d-flex flex-row align-items-center justify-content-between">

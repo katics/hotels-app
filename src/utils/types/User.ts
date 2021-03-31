@@ -1,7 +1,8 @@
-import { UserLoginData } from "./UserLoginData";
-import { UserRegistrationData } from "./UserRegistrationData";
-
 export interface User {
-  userRegistrationData: UserRegistrationData;
-  userLoginData: UserLoginData;
+  token?: string;
+  username?: string;
+  first_name?: string;
+  last_name?: string;
+  user_id?: number;
+  email?: string;
 }

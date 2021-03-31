@@ -1,25 +1,23 @@
-import { User } from "../../utils/types/User";
-import { REGISTER_USER } from "./userActionTypes";
+import { UserData } from "../../utils/types/UserData";
+import {
+  FETCH_LOGIN_USER,
+  FETCH_LOGIN_USER_SUCCESS,
+  REGISTER_USER,
+} from "./userActionTypes";
 
-const initialState: User = {
-  userRegistrationData: {
-    userName: "katics",
-    firstName: "Sasa",
-    lastName: "Katic",
-    email: "katics@gsdf.dfo",
-    password: "123456",
-    confirmPassword: "123456",
-  },
-  userLoginData: {
-    userName: "katics",
-    password: "123456",
-  },
+const initialState: UserData = {
+  isLoggedIn: false,
+  currentUser: {},
 };
 
-const user = (state = initialState, action: any = {}): User => {
+const user = (state = initialState, action: any = {}): UserData => {
   switch (action.type) {
     case REGISTER_USER:
-      return { ...state }; //TODO
+      return { ...state };
+    case FETCH_LOGIN_USER:
+      return { ...state };
+    case FETCH_LOGIN_USER_SUCCESS:
+      return { ...state, currentUser: action.payload };
     default:
       return state;
   }

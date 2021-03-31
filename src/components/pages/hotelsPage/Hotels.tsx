@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
 import store from "../../../store";
-import { hotelsSelector } from "../../../store/appSelector";
+import { hotelsSelector } from "../../../store/hotel/hotelSelector";
 import HotelProvider, {
   useDispatchHotel,
   useSelectorHotel,
