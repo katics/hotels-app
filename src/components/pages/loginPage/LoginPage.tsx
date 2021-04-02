@@ -1,6 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useHistory } from "react-router";
 
 import store from "../../../store";
 import HotelProvider, {
@@ -12,6 +11,7 @@ import { fetchLoginUser } from "../../../store/user/userActions";
 import { userSeletor } from "../../../store/user/userSelector";
 import { AppRoutes } from "../../../utils/AppRoutes";
 import { UserLoginData } from "../../../utils/types/UserLoginData";
+import "./LoginPage.scss";
 
 const LoginPage: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -21,14 +21,7 @@ const LoginPage: FC = () => (
 
 const UserLogin: FC = () => {
   const userDispatch = useDispatchHotel();
-  const { currentUser } = useSelectorHotel(userSeletor);
-  const history = useHistory();
-
-  useEffect(() => {
-    if (currentUser.token) {
-      history.push(AppRoutes.hotels);
-    }
-  }, [currentUser.token]);
+  const { loginError } = useSelectorHotel(userSeletor);
 
   const userLoginData: UserLoginData = { username: "", password: "" };
   const [loginData, setLoginData] = useState(userLoginData);
@@ -53,7 +46,7 @@ const UserLogin: FC = () => {
   };
 
   return (
-    <div className="col-md-6 login-container">
+    <div className="col-md-7 login-container">
       <div className="card login-form">
         <div className="card-body">
           <h3 className="card-title text-center">Log in</h3>
@@ -88,6 +81,11 @@ const UserLogin: FC = () => {
                 <NavLink className="float-right" to={AppRoutes.register}>
                   Register
                 </NavLink>
+                {loginError ? (
+                  <div className="login_error">
+                    Username or password not valid
+                  </div>
+                ) : null}
               </div>
             </form>
           </div>

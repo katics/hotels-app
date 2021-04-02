@@ -22,39 +22,45 @@ const HeaderContainer: FC = () => (
 const Header: FC = () => {
   const history = useHistory();
   const userDispatch = useDispatchHotel();
-  const { currentUser } = useSelectorHotel(userSeletor);
+  const { isLogged, currentUser } = useSelectorHotel(userSeletor);
 
   const logout = () => {
     userDispatch(logoutUser());
     history.push(AppRoutes.home);
   };
+  const userLoggedInNaigation = (
+    <ul className="navbar-nav">
+      <li>
+        <NavLink className="nav-link text-light" to={AppRoutes.home}>
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className="nav-link text-light" to={AppRoutes.hotels}>
+          Hotels
+        </NavLink>
+      </li>
+      <li>
+        <div className="nav-link text-light logout-link" onClick={logout}>
+          Logout {currentUser.username}
+        </div>
+      </li>
+    </ul>
+  );
+
+  const userNotLoggiedIn = (
+    <ul className="navbar-nav">
+      <li>
+        <NavLink className="nav-link text-light" to={AppRoutes.login}>
+          Login
+        </NavLink>
+      </li>
+    </ul>
+  );
+
   return (
     <nav className="navbar navbar-expand-sm bg-secondary">
-      <ul className="navbar-nav">
-        <li>
-          <NavLink className="nav-link text-light" to={AppRoutes.home}>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="nav-link text-light" to={AppRoutes.hotels}>
-            Hotels
-          </NavLink>
-        </li>
-        {!currentUser.token ? (
-          <li>
-            <NavLink className="nav-link text-light" to={AppRoutes.login}>
-              Login
-            </NavLink>
-          </li>
-        ) : (
-          <li>
-            <div className="nav-link text-light logout-link" onClick={logout}>
-              Logout {currentUser.username}
-            </div>
-          </li>
-        )}
-      </ul>
+      {isLogged ? userLoggedInNaigation : userNotLoggiedIn}
     </nav>
   );
 };

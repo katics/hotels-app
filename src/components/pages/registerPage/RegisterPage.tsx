@@ -1,20 +1,46 @@
 import { FC, useState } from "react";
+
+import store from "../../../store";
+import HotelProvider, {
+  hotelContext,
+  useDispatchHotel,
+  useSelectorHotel,
+} from "../../../store/HotelProvider";
+import { fetchRegisterUser } from "../../../store/user/userActions";
+import { userSeletor } from "../../../store/user/userSelector";
 import { UserRegistrationData } from "../../../utils/types/UserRegistrationData";
 import "./RegisterPage";
+import "./RegisterPage.scss";
 
-const UserRegistrationPage: FC = () => {
+const UserRegistrationPage: FC = () => (
+  <HotelProvider store={store} context={hotelContext}>
+    <UserRegistration />
+  </HotelProvider>
+);
+
+const UserRegistration: FC = () => {
+  const userDispatch = useDispatchHotel();
+  const { registerError } = useSelectorHotel(userSeletor);
+
   const userRegistrationData: UserRegistrationData = {
-    userName: "",
-    firstName: "",
+    username: "",
+    first_name: "",
     password: "",
     confirmPassword: "",
-    lastName: "",
+    last_name: "",
     email: "",
   };
 
   const [registrationData, setRegistrationData] = useState(
     userRegistrationData
   );
+
+  const signInClick = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(registrationData);
+    userDispatch(fetchRegisterUser(registrationData));
+  };
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -22,16 +48,19 @@ const UserRegistrationPage: FC = () => {
           <div className="card">
             <h2 className="card-title text-center">Register</h2>
             <div className="card-body py-md-4">
-              <form>
+              <form onSubmit={signInClick}>
                 <div className="form-group">
                   <label>User Name</label>
                   <input
                     type="text"
                     className="form-control"
                     id="user-name"
-                    value={registrationData.userName}
+                    value={registrationData.username}
                     onChange={e => {
-                      setRegistrationData({ userName: e.target.value });
+                      setRegistrationData({
+                        ...registrationData,
+                        username: e.target.value,
+                      });
                     }}
                   />
                 </div>
@@ -41,9 +70,12 @@ const UserRegistrationPage: FC = () => {
                     type="text"
                     className="form-control"
                     id="name"
-                    value={registrationData.firstName}
+                    value={registrationData.first_name}
                     onChange={e => {
-                      setRegistrationData({ firstName: e.target.value });
+                      setRegistrationData({
+                        ...registrationData,
+                        first_name: e.target.value,
+                      });
                     }}
                   />
                 </div>
@@ -53,9 +85,12 @@ const UserRegistrationPage: FC = () => {
                     type="text"
                     className="form-control"
                     id="last-name"
-                    value={registrationData.lastName}
+                    value={registrationData.last_name}
                     onChange={e => {
-                      setRegistrationData({ lastName: e.target.value });
+                      setRegistrationData({
+                        ...registrationData,
+                        last_name: e.target.value,
+                      });
                     }}
                   />
                 </div>
@@ -67,7 +102,10 @@ const UserRegistrationPage: FC = () => {
                     id="email"
                     value={registrationData.email}
                     onChange={e => {
-                      setRegistrationData({ email: e.target.value });
+                      setRegistrationData({
+                        ...registrationData,
+                        email: e.target.value,
+                      });
                     }}
                   />
                 </div>
@@ -79,7 +117,10 @@ const UserRegistrationPage: FC = () => {
                     id="password"
                     value={registrationData.password}
                     onChange={e => {
-                      setRegistrationData({ password: e.target.value });
+                      setRegistrationData({
+                        ...registrationData,
+                        password: e.target.value,
+                      });
                     }}
                   />
                 </div>
@@ -91,7 +132,10 @@ const UserRegistrationPage: FC = () => {
                     id="confirm-password"
                     value={registrationData.confirmPassword}
                     onChange={e => {
-                      setRegistrationData({ confirmPassword: e.target.value });
+                      setRegistrationData({
+                        ...registrationData,
+                        confirmPassword: e.target.value,
+                      });
                     }}
                   />
                 </div>
@@ -100,6 +144,11 @@ const UserRegistrationPage: FC = () => {
                     Create Account
                   </button>
                 </div>
+                {registerError ? (
+                  <div className="register_error">
+                    Error, unable to register user
+                  </div>
+                ) : null}
               </form>
             </div>
           </div>

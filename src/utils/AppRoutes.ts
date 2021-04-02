@@ -3,4 +3,5 @@ export const AppRoutes = {
   hotels: "/hotels",
   login: "/login",
   register: "/register",
+  pageNotFound: "/pageNotFound",
 };
