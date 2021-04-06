@@ -1,8 +1,12 @@
-import { ADD_HOTEL } from "./hotelActionTypes";
+import {
+  ADD_HOTEL,
+  FETCH_HOTELS,
+  FETCH_HOTELS_SUCCESS,
+} from "./hotelActionTypes";
 import { Hotels } from "../../utils/types/Hotels";
 
 const initialState: Hotels = {
-  listOfHotels: [{ name: "Hotel Park" }],
+  listOfHotels: [{}],
 };
 
 const hotel = (state = initialState, action: any = {}): Hotels => {
@@ -10,7 +14,15 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
     case ADD_HOTEL:
       return {
         ...state,
-        listOfHotels: [...state.listOfHotels, { name: action.hotel.name }],
+      };
+    case FETCH_HOTELS:
+      return {
+        ...state,
+      };
+    case FETCH_HOTELS_SUCCESS:
+      return {
+        ...state,
+        listOfHotels: action.payload,
       };
     default:
       return state;

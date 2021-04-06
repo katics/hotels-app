@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { AppRoutes } from "../../../utils/AppRoutes";
+import { APP_ROUTES } from "../../../utils/AppRoutes";
 
 const PageNotFound: FC = () => (
   <div>
     Page Not Found
-    <NavLink className="nav-link text-primary" to={AppRoutes.home}>
+    <NavLink className="nav-link text-primary" to={APP_ROUTES.welcomePage}>
       Go Home
     </NavLink>
   </div>

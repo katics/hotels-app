@@ -11,7 +11,7 @@ import HotelProvider, {
 } from "../../store/HotelProvider";
 import { logoutUser } from "../../store/user/userActions";
 import { userSeletor } from "../../store/user/userSelector";
-import { AppRoutes } from "../../utils/AppRoutes";
+import { APP_ROUTES } from "../../utils/AppRoutes";
 
 const HeaderContainer: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -26,17 +26,17 @@ const Header: FC = () => {
 
   const logout = () => {
     userDispatch(logoutUser());
-    history.push(AppRoutes.home);
+    history.push(APP_ROUTES.welcomePage);
   };
   const userLoggedInNaigation = (
     <ul className="navbar-nav">
       <li>
-        <NavLink className="nav-link text-light" to={AppRoutes.home}>
+        <NavLink className="nav-link text-light" to={APP_ROUTES.welcomePage}>
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink className="nav-link text-light" to={AppRoutes.hotels}>
+        <NavLink className="nav-link text-light" to={APP_ROUTES.hotelsPage}>
           Hotels
         </NavLink>
       </li>
@@ -51,7 +51,7 @@ const Header: FC = () => {
   const userNotLoggiedIn = (
     <ul className="navbar-nav">
       <li>
-        <NavLink className="nav-link text-light" to={AppRoutes.login}>
+        <NavLink className="nav-link text-light" to={APP_ROUTES.loginPage}>
           Login
         </NavLink>
       </li>

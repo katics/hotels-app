@@ -1,6 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import store from "../../../store";
+import HotelCard from "../../hotelCard/HotelCard";
 import { hotelsSelector } from "../../../store/hotel/hotelSelector";
 import HotelProvider, {
   useDispatchHotel,
@@ -8,10 +9,11 @@ import HotelProvider, {
   hotelContext,
 } from "../../../store/HotelProvider";
 
-import { addHotel } from "../../../store/hotel/hotelActions";
+import { fetchHotels } from "../../../store/hotel/hotelActions";
 
 import "./Hotels.scss";
 import { Hotel } from "../../../utils/types/Hotel";
+import { userSeletor } from "../../../store/user/userSelector";
 
 const HotelsPage: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -21,35 +23,20 @@ const HotelsPage: FC = () => (
 
 const Hotels: FC = () => {
   const { listOfHotels } = useSelectorHotel(hotelsSelector);
+  const { currentUser } = useSelectorHotel(userSeletor);
   const hotelDispatch = useDispatchHotel();
 
-  const hotelsta: Hotel = { name: "" };
-  const [hotel, setHotel] = useState(hotelsta);
-
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setHotel({ name: e.target.value });
-  };
-
-  const onAddClick = () => {
-    hotelDispatch(addHotel(hotel));
-    setHotel({ name: "" });
-  };
+  useEffect(() => {
+    hotelDispatch(fetchHotels(currentUser.token as string));
+  }, []);
 
   return (
-    <div className="App">
-      <input
-        type="text"
-        placeholder="add Hotel"
-        value={hotel.name}
-        onChange={onInputChange}
-      />
-      <button onClick={onAddClick}>Add Hotel</button>
-      <ul>
-        {listOfHotels.map((hotel: Hotel) => (
-          <li key={hotel.name}>{hotel.name}</li>
+    <div className="col-md-12 col-lg-12">
+      <div className="row">
+        {listOfHotels.map((hotel: Hotel, key: any) => (
+          <HotelCard key={key} hotel={hotel} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

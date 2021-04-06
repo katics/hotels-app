@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import store from "../../../store";
@@ -9,9 +9,10 @@ import HotelProvider, {
 } from "../../../store/HotelProvider";
 import { fetchLoginUser } from "../../../store/user/userActions";
 import { userSeletor } from "../../../store/user/userSelector";
-import { AppRoutes } from "../../../utils/AppRoutes";
+import { APP_ROUTES } from "../../../utils/AppRoutes";
 import { UserLoginData } from "../../../utils/types/UserLoginData";
 import "./LoginPage.scss";
+import { useHistory } from "react-router";
 
 const LoginPage: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -20,8 +21,10 @@ const LoginPage: FC = () => (
 );
 
 const UserLogin: FC = () => {
+  const history = useHistory();
+
   const userDispatch = useDispatchHotel();
-  const { loginError } = useSelectorHotel(userSeletor);
+  const { loginError, isLogged } = useSelectorHotel(userSeletor);
 
   const userLoginData: UserLoginData = { username: "", password: "" };
   const [loginData, setLoginData] = useState(userLoginData);
@@ -44,6 +47,9 @@ const UserLogin: FC = () => {
     e.preventDefault();
     userDispatch(fetchLoginUser(loginData));
   };
+  useEffect(() => {
+    if (isLogged) history.push(APP_ROUTES.hotelsPage);
+  }, [isLogged]);
 
   return (
     <div className="col-md-7 login-container">
@@ -78,7 +84,7 @@ const UserLogin: FC = () => {
               </button>
               <div className="sign-up">
                 Don't have an account?
-                <NavLink className="float-right" to={AppRoutes.register}>
+                <NavLink className="float-right" to={APP_ROUTES.registerPage}>
                   Register
                 </NavLink>
                 {loginError ? (
