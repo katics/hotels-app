@@ -1,35 +1,60 @@
 import { FC } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
-import HotelsPage from "../components/pages/hotelsPage/Hotels";
+import DashboardPage from "../components/containers/dashboardContainer/DashboardContainer";
 import LoginPage from "../components/pages/loginPage/LoginPage";
 import PageNotFound from "../components/pages/pageNotFound/PageNotFound";
 import UserRegistrationPage from "../components/pages/registerPage/RegisterPage";
-import { COMPONENT_PAGES, ROUTE_COMPONENTS } from "./AppRoutes";
-import WelcomePage from "../components/pages/welcomePage/WelcomePage";
+import { APP_ROUTES, COMPONENT_PAGES, ROUTE_COMPONENTS } from "./AppRoutes";
+import HotelProvider, {
+  hotelContext,
+  useSelectorHotel,
+} from "../store/HotelProvider";
+import store from "../store";
+import { userSeletor } from "../store/user/userSelector";
+import HotelDetailsPage from "../components/containers/hotelDetailsContainer/HotelDetailsContainer";
 
 const components = {
-  blank: PageNotFound,
-  [COMPONENT_PAGES.welcomePage]: WelcomePage,
-  [COMPONENT_PAGES.hotelsPage]: HotelsPage,
+  blank: undefined,
+  [COMPONENT_PAGES.dashboard]: DashboardPage,
+  [COMPONENT_PAGES.hotelDetails]: HotelDetailsPage,
   [COMPONENT_PAGES.loginPage]: LoginPage,
   [COMPONENT_PAGES.registerPage]: UserRegistrationPage,
+  [COMPONENT_PAGES.pageNotFound]: PageNotFound,
 };
+
+const RouteCreatorProvider: FC = () => {
+  return (
+    <HotelProvider store={store} context={hotelContext}>
+      <RouteCreator />
+    </HotelProvider>
+  );
+};
+
 const RouteCreator: FC = () => {
+  const { isLogged } = useSelectorHotel(userSeletor);
+
+  const routeComponent = () => {
+    return isLogged
+      ? ROUTE_COMPONENTS
+      : ROUTE_COMPONENTS.filter(item => item.protected == false);
+  };
+
   return (
     <Switch>
-      {ROUTE_COMPONENTS.map((route, routeKey) => {
-        const componentRoute = components[route.component || "blank"];
+      {routeComponent().map((route, routeKey) => {
+        const component = components[route.component || "blank"];
         return (
           <Route
             key={`routesKey${routeKey.toString()}`}
-            component={componentRoute}
+            component={component}
             path={route.path}
             exact
           />
         );
       })}
+      <Route render={() => <Redirect to={APP_ROUTES.pageNotFound} />} />
     </Switch>
   );
 };
-export default RouteCreator;
+export default RouteCreatorProvider;

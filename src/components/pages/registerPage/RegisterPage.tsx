@@ -42,9 +42,9 @@ const UserRegistration: FC = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row justify-content-center">
-        <div className="col-md-6">
+        <div className="col-md-3">
           <div className="card">
             <h2 className="card-title text-center">Register</h2>
             <div className="card-body py-md-4">

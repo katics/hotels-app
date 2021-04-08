@@ -27,7 +27,6 @@ const user = (state = initialState, action: any = {}): UserData => {
       return { ...state, loginError: true };
     case LOGOUT_USER:
       return initialState;
-
     case FETCH_REGISTER_USER:
       return { ...state };
     case FETCH_REGISTER_USER_SUCCESS:

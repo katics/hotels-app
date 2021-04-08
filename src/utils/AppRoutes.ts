@@ -1,43 +1,48 @@
 export const APP_ROUTES = {
-  welcomePage: "/",
-  hotelsPage: "/hotels",
-  loginPage: "/login",
+  loginPage: "/",
+  dashboard: "/dashboard",
+  hotelDetails: "/dashboard/:hotelId",
   registerPage: "/register",
   pageNotFound: "/pageNotFound",
 };
 
 export const COMPONENT_PAGES = {
-  welcomePage: "WelcomePage",
-  hotelsPage: "HotelsPage",
   loginPage: "LoginPage",
+  dashboard: "Dashboard",
+  hotelDetails: "HotelDetails",
   registerPage: "RegisterPage",
   pageNotFound: "PageNotFound",
 };
 
 export const ROUTE_COMPONENTS = [
   {
-    path: APP_ROUTES.welcomePage,
-    component: COMPONENT_PAGES.welcomePage,
-    title: "Home",
+    path: APP_ROUTES.dashboard,
+    component: COMPONENT_PAGES.dashboard,
+    title: "Dashboard",
+    protected: true,
   },
   {
-    path: APP_ROUTES.hotelsPage,
-    component: COMPONENT_PAGES.hotelsPage,
-    title: "Dashboard",
+    path: APP_ROUTES.hotelDetails,
+    component: COMPONENT_PAGES.hotelDetails,
+    title: "Hotel Details",
+    protected: true,
   },
   {
     path: APP_ROUTES.loginPage,
     component: COMPONENT_PAGES.loginPage,
     title: "Login",
+    protected: false,
   },
   {
     path: APP_ROUTES.registerPage,
     component: COMPONENT_PAGES.registerPage,
     title: "Register",
+    protected: false,
   },
   {
     path: APP_ROUTES.pageNotFound,
     component: COMPONENT_PAGES.pageNotFound,
     title: "Page not found",
+    protected: false,
   },
 ];

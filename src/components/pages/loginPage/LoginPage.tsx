@@ -48,11 +48,12 @@ const UserLogin: FC = () => {
     userDispatch(fetchLoginUser(loginData));
   };
   useEffect(() => {
-    if (isLogged) history.push(APP_ROUTES.hotelsPage);
+    console.log("Redirect na loginu, user je logovan: " + isLogged.toString());
+    if (isLogged) history.push(APP_ROUTES.dashboard);
   }, [isLogged]);
 
   return (
-    <div className="col-md-7 login-container">
+    <div className="col-md-3 login-container">
       <div className="card login-form">
         <div className="card-body">
           <h3 className="card-title text-center">Log in</h3>

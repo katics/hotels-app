@@ -5,6 +5,8 @@ import {
   ADD_HOTEL,
   FETCH_HOTELS,
   FETCH_HOTELS_SUCCESS,
+  FETCH_HOTEL_DETAILS,
+  FETCH_HOTEL_DETAILS_SUCCESS,
 } from "./hotelActionTypes";
 
 export const addHotel = (hotel: Hotel): AnyAction => ({
@@ -20,4 +22,14 @@ export const fetchHotels = (token: string): AnyAction => ({
 export const fetchHotelsSuccess = (hotels: Hotels): AnyAction => ({
   type: FETCH_HOTELS_SUCCESS,
   payload: hotels,
+});
+
+export const fetchHotelDetails = (hotelId: string): AnyAction => ({
+  type: FETCH_HOTEL_DETAILS,
+  payload: hotelId,
+});
+
+export const fetchHotelDetailsSuccess = (hotel: Hotel): AnyAction => ({
+  type: FETCH_HOTEL_DETAILS_SUCCESS,
+  payload: hotel,
 });

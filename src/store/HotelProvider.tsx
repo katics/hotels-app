@@ -1,6 +1,7 @@
 import { createContext, FC } from "react";
 import { createDispatchHook, createSelectorHook, Provider } from "react-redux";
 import { AnyAction, Store } from "redux";
+import { Hotel } from "../utils/types/Hotel";
 
 import { Hotels } from "../utils/types/Hotels";
 import { UserData } from "../utils/types/UserData";
@@ -8,6 +9,7 @@ import { UserData } from "../utils/types/UserData";
 export interface HotelState {
   hotels: Hotels;
   user: UserData;
+  hotelDetails: Hotel; //TODO!!!!!
 }
 
 interface ContextProps {

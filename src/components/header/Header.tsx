@@ -22,27 +22,22 @@ const HeaderContainer: FC = () => (
 const Header: FC = () => {
   const history = useHistory();
   const userDispatch = useDispatchHotel();
-  const { isLogged, currentUser } = useSelectorHotel(userSeletor);
+  const { isLogged } = useSelectorHotel(userSeletor);
 
   const logout = () => {
     userDispatch(logoutUser());
-    history.push(APP_ROUTES.welcomePage);
+    history.push(APP_ROUTES.loginPage);
   };
   const userLoggedInNaigation = (
     <ul className="navbar-nav">
       <li>
-        <NavLink className="nav-link text-light" to={APP_ROUTES.welcomePage}>
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink className="nav-link text-light" to={APP_ROUTES.hotelsPage}>
-          Hotels
+        <NavLink className="nav-link text-light" to={APP_ROUTES.dashboard}>
+          Dashboard
         </NavLink>
       </li>
       <li>
         <div className="nav-link text-light logout-link" onClick={logout}>
-          Logout {currentUser.username}
+          Logout
         </div>
       </li>
     </ul>
@@ -59,7 +54,7 @@ const Header: FC = () => {
   );
 
   return (
-    <nav className="navbar navbar-expand-sm bg-secondary">
+    <nav className="navbar navbar-expand-sm navigation">
       {isLogged ? userLoggedInNaigation : userNotLoggiedIn}
     </nav>
   );
