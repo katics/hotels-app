@@ -8,7 +8,21 @@ import { Hotels } from "../../utils/types/Hotels";
 
 const initialState: Hotels = {
   listOfHotels: [],
-  hotelDetails: {},
+  hotelDetails: {
+    id: 0,
+    name: "",
+    city: "",
+    country: "",
+    image: "",
+    stars: 0,
+    date: new Date(),
+    description: "",
+    price: 0,
+    likes: 0,
+    dislikes: 0,
+    user: [],
+    location: "",
+  },
 };
 
 const hotel = (state = initialState, action: any = {}): Hotels => {

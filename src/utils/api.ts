@@ -22,7 +22,8 @@ export const userLogin = (loginData: UserLoginData): any => {
 };
 
 export const registerUser = (registerUserData: UserRegistrationData): any => {
-  delete registerUserData.confirmPassword;
+  const { confirmPassword, ...regUserDataApi } = registerUserData;
+  console.log(JSON.stringify(regUserDataApi));
   return axios({
     url: apiUrl + "/register/",
     method: "POST",
@@ -30,13 +31,13 @@ export const registerUser = (registerUserData: UserRegistrationData): any => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    data: JSON.stringify(registerUserData),
+    data: JSON.stringify(regUserDataApi),
   }).catch(err => {
     console.log(err);
   });
 };
 
-export const fetchHotels = (token: string) => {
+export const fetchHotels = (token: string): any => {
   return axios({
     url: apiUrl + "/hotel_api/",
     method: "GET",
@@ -48,7 +49,7 @@ export const fetchHotels = (token: string) => {
   });
 };
 
-export const fetchHotelDetailsAPI = (hotelId: string) => {
+export const fetchHotelDetailsAPI = (hotelId: string): any => {
   return axios({
     url: apiUrl + "/hotel_api/" + hotelId,
     method: "GET",

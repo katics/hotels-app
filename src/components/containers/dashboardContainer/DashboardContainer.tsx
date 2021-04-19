@@ -32,7 +32,7 @@ const DashboardContainer: FC = () => {
     <DashboardLayout
       hotels={listOfHotels}
       title="List of all hotels"
-      fetchAllHotels={token => fetchHotelForCurrentUser(token)}
+      fetchHotels={token => fetchHotelForCurrentUser(token)}
       user={currentUser}
     />
   );

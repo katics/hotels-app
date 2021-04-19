@@ -23,13 +23,14 @@ const HotelDetailsPage: FC = () => {
   }, [hotelId]);
   return (
     <HotelDetailsLayout
-      name={hotelDetails.name as string}
-      city={hotelDetails.city as string}
-      country={hotelDetails.country as string}
-      stars={hotelDetails.stars as number}
-      image={hotelDetails.image as string}
-      likes={hotelDetails.likes as number}
-      description={hotelDetails.description as string}
+      name={hotelDetails.name}
+      city={hotelDetails.city}
+      country={hotelDetails.country}
+      stars={hotelDetails.stars}
+      image={hotelDetails.image}
+      likes={hotelDetails.likes}
+      description={hotelDetails.description}
+      price={hotelDetails.price}
     />
   );
 };

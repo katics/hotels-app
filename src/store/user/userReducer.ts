@@ -14,7 +14,14 @@ const initialState: UserData = {
   registerError: false,
   isLogged: false,
   hasRegisred: false,
-  currentUser: {},
+  currentUser: {
+    token: "",
+    username: "",
+    first_name: "",
+    last_name: "",
+    user_id: 0,
+    email: "",
+  },
 };
 
 const user = (state = initialState, action: any = {}): UserData => {

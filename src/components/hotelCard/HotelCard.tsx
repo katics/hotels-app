@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useHistory } from "react-router";
+import { NavLink } from "react-router-dom";
 import { APP_ROUTES } from "../../utils/AppRoutes";
 
 import { Hotel } from "../../utils/types/Hotel";
@@ -10,10 +10,6 @@ interface HotelData {
 }
 
 const HotelCard: FC<HotelData> = props => {
-  const history = useHistory();
-  const handleDetailsClick = () => {
-    history.push(`${APP_ROUTES.dashboard}/${props.hotel.id}`);
-  };
   return (
     <div className="col-md-3 py-2">
       <div className=" hotel-card card card-body h-100">
@@ -35,9 +31,9 @@ const HotelCard: FC<HotelData> = props => {
           <label>Stars:</label>
           <span>{props.hotel.stars}</span>
         </div>
-        <button onClick={handleDetailsClick} className="btn btn-primary">
+        <NavLink to={`${APP_ROUTES.dashboard}/${props.hotel.id}`}>
           Details
-        </button>
+        </NavLink>
       </div>
     </div>
   );

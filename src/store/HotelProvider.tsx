@@ -9,7 +9,7 @@ import { UserData } from "../utils/types/UserData";
 export interface HotelState {
   hotels: Hotels;
   user: UserData;
-  hotelDetails: Hotel; //TODO!!!!!
+  hotelDetails: Hotel;
 }
 
 interface ContextProps {

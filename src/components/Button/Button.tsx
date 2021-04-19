@@ -4,11 +4,11 @@ interface buttonProps {
   title: string;
   handleClick: () => void;
 }
-const CustomButton: FC<buttonProps> = props => {
+const CustomButton: FC<buttonProps> = ({ title, handleClick }) => {
   return (
     <div>
-      <button onClick={props.handleClick} className="btn btn-primary">
-        {props.title}
+      <button onClick={handleClick} className="btn btn-primary">
+        {title}
       </button>
     </div>
   );

@@ -9,39 +9,56 @@ interface hotelDetailsProps {
   image: string;
   likes: number;
   description: string;
+  price: number;
 }
-const HotelDetailsLayout: FC<hotelDetailsProps> = props => {
+const HotelDetailsLayout: FC<hotelDetailsProps> = ({
+  name,
+  city,
+  country,
+  stars,
+  image,
+  likes,
+  description,
+  price,
+}) => {
   return (
     <div className="col-md-12 col-lg-12">
       <div className="hotel-details py-2 px-2 row h-100">
         <div className="col-sm-4">
-          <img className="img-fluid" src={props.image} alt={props.name}></img>
+          <img className="hotel-img img-fluid" src={image} alt={name}></img>
         </div>
         <div className="col-sm-8">
           <div className="text-center">
-            <h3>{props.name}</h3>
+            <h3>{name}</h3>
           </div>
           <div className="row">
             <div className="description col-sm-10">
-              <p>{props.description}</p>
+              <p>{description}</p>
             </div>
             <div className="details col-sm-2">
               <div className="hotel-stars">
                 <label>Stars: </label>
-                <label> {props.stars}</label>
+                <label className="float-right"> {stars}</label>
               </div>
               <div className="hotel-likes">
                 <label>Likes: </label>
-                <label> {props.likes}</label>
+                <label className="float-right"> {likes}</label>
               </div>
               <div className="hotel-country">
                 <label>Country: </label>
-                <label> {props.country}</label>
+                <label className="float-right"> {country}</label>
               </div>
-              <div className="hotel-country">
+              <div className="hotel-city">
                 <label>City: </label>
-                <label> {props.city}</label>
+                <label className="float-right"> {city}</label>
               </div>
+              <div className="hotel-price">
+                <label>Price: </label>
+                <label className="float-right">{price} RSD</label>
+              </div>
+            </div>
+            <div>
+              <button className="btn btn-primary">Add to favorites</button>
             </div>
           </div>
         </div>

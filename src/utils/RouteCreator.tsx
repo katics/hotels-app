@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 
 import DashboardPage from "../components/containers/dashboardContainer/DashboardContainer";
 import LoginPage from "../components/pages/loginPage/LoginPage";
+import LoginContainer from "../components/containers/loginContainer/LoginContainer";
 import PageNotFound from "../components/pages/pageNotFound/PageNotFound";
 import UserRegistrationPage from "../components/pages/registerPage/RegisterPage";
 import { APP_ROUTES, COMPONENT_PAGES, ROUTE_COMPONENTS } from "./AppRoutes";
@@ -18,7 +19,7 @@ const components = {
   blank: undefined,
   [COMPONENT_PAGES.dashboard]: DashboardPage,
   [COMPONENT_PAGES.hotelDetails]: HotelDetailsPage,
-  [COMPONENT_PAGES.loginPage]: LoginPage,
+  [COMPONENT_PAGES.loginPage]: LoginContainer,
   [COMPONENT_PAGES.registerPage]: UserRegistrationPage,
   [COMPONENT_PAGES.pageNotFound]: PageNotFound,
 };
@@ -34,15 +35,12 @@ const RouteCreatorProvider: FC = () => {
 const RouteCreator: FC = () => {
   const { isLogged } = useSelectorHotel(userSeletor);
 
-  const routeComponent = () => {
-    return isLogged
-      ? ROUTE_COMPONENTS
-      : ROUTE_COMPONENTS.filter(item => item.protected == false);
-  };
-
+  const routeComponent = isLogged
+    ? ROUTE_COMPONENTS
+    : ROUTE_COMPONENTS.filter(item => item.protected == false);
   return (
     <Switch>
-      {routeComponent().map((route, routeKey) => {
+      {routeComponent.map((route, routeKey) => {
         const component = components[route.component || "blank"];
         return (
           <Route
