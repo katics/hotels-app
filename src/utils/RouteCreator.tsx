@@ -2,10 +2,9 @@ import { FC } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import DashboardPage from "../components/containers/dashboardContainer/DashboardContainer";
-import LoginPage from "../components/pages/loginPage/LoginPage";
 import LoginContainer from "../components/containers/loginContainer/LoginContainer";
 import PageNotFound from "../components/pages/pageNotFound/PageNotFound";
-import UserRegistrationPage from "../components/pages/registerPage/RegisterPage";
+import UserRegistrationPage from "../components/containers/registerContainer/RegisterContainer";
 import { APP_ROUTES, COMPONENT_PAGES, ROUTE_COMPONENTS } from "./AppRoutes";
 import HotelProvider, {
   hotelContext,

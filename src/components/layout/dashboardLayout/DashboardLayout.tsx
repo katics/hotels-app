@@ -4,7 +4,6 @@ import { Hotel } from "../../../utils/types/Hotel";
 import HotelCard from "../../hotelCard/HotelCard";
 import { User } from "../../../utils/types/User";
 import Button from "../../Button/Button";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 interface hotelLayoutProps {
   hotels: Hotel[];
@@ -19,7 +18,7 @@ const DashboardLayout: FC<hotelLayoutProps> = ({
   fetchHotels,
 }) => {
   const handleButtonClick = () => {
-    fetchHotels(user.token as string);
+    fetchHotels(user.token);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { fetchHotelDetails } from "../../../store/hotel/hotelActions";
 import { hotelsSelector } from "../../../store/hotel/hotelSelector";
 import {
@@ -13,6 +13,7 @@ interface Params {
 }
 
 const HotelDetailsPage: FC = () => {
+  //const history = useHistory();
   const { hotelDetails } = useSelectorHotel(hotelsSelector);
   const hotelDispatch = useDispatchHotel();
 

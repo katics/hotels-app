@@ -22,7 +22,7 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
   price,
 }) => {
   return (
-    <div className="col-md-12 col-lg-12">
+    <div className="col-sm-12 col-lg-12">
       <div className="hotel-details py-2 px-2 row h-100">
         <div className="col-sm-4">
           <img className="hotel-img img-fluid" src={image} alt={name}></img>
@@ -57,8 +57,11 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
                 <label className="float-right">{price} RSD</label>
               </div>
             </div>
-            <div>
-              <button className="btn btn-primary">Add to favorites</button>
+            <div className="col-lg-8">
+              <button className="btn btn-info float-left">Back</button>
+              <button className="btn btn-primary float-right">
+                Add to favorites
+              </button>
             </div>
           </div>
         </div>

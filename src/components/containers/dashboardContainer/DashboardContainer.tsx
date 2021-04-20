@@ -20,7 +20,6 @@ const DashboardPage: FC = () => (
 
 const DashboardContainer: FC = () => {
   const fetchHotelForCurrentUser = (token: string) => {
-    console.log("FETCH hotels Function:   " + token);
     hotelDispatch(fetchHotels(token));
   };
 
@@ -29,12 +28,18 @@ const DashboardContainer: FC = () => {
   const hotelDispatch = useDispatchHotel();
 
   return (
-    <DashboardLayout
-      hotels={listOfHotels}
-      title="List of all hotels"
-      fetchHotels={token => fetchHotelForCurrentUser(token)}
-      user={currentUser}
-    />
+    <>
+      {listOfHotels ? (
+        <DashboardLayout
+          hotels={listOfHotels}
+          title="List of all hotels"
+          fetchHotels={token => fetchHotelForCurrentUser(token)}
+          user={currentUser}
+        />
+      ) : (
+        <div>SPINNER</div>
+      )}
+    </>
   );
 };
 

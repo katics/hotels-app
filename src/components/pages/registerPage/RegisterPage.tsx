@@ -1,94 +1,39 @@
-import { ChangeEvent, FC, useState } from "react";
+import { FC } from "react";
 
-import store from "../../../store";
-import HotelProvider, {
-  hotelContext,
-  useDispatchHotel,
-  useSelectorHotel,
-} from "../../../store/HotelProvider";
-import { fetchRegisterUser } from "../../../store/user/userActions";
-import { userSeletor } from "../../../store/user/userSelector";
 import { UserRegistrationData } from "../../../utils/types/UserRegistrationData";
 import FormError from "../../error/Error";
 import FormFieldSet from "../../formFieldSet/FormFieldSet";
+
 import "./RegisterPage";
 import "./RegisterPage.scss";
 
-const UserRegistrationPage: FC = () => (
-  <HotelProvider store={store} context={hotelContext}>
-    <UserRegistration />
-  </HotelProvider>
-);
+interface UserRegisterProps {
+  registerError: boolean;
+  registrationData: UserRegistrationData;
+  signInClick: (e: any) => void;
+  userNameChanged: (e: any) => void;
+  firstNameChanged: (e: any) => void;
+  lastNameChanged: (e: any) => void;
+  emailChanged: (e: any) => void;
+  passwordChanged: (e: any) => void;
+  confirmPasswordChanged: (e: any) => void;
+}
 
-const UserRegistration: FC = () => {
-  const userDispatch = useDispatchHotel();
-  const { registerError } = useSelectorHotel(userSeletor);
-
-  const userRegistrationData: UserRegistrationData = {
-    username: "",
-    first_name: "",
-    password: "",
-    confirmPassword: "",
-    last_name: "",
-    email: "",
-  };
-
-  const [registrationData, setRegistrationData] = useState(
-    userRegistrationData
-  );
-
-  const signInClick = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(registrationData);
-    userDispatch(fetchRegisterUser(registrationData));
-  };
-
-  const userNameChanged = (e: any) => {
-    setRegistrationData({
-      ...registrationData,
-      username: e.target.value,
-    });
-  };
-
-  const firstNameChanged = (e: any) => {
-    setRegistrationData({
-      ...registrationData,
-      first_name: e.target.value,
-    });
-  };
-
-  const lastNameChanged = (e: any) => {
-    setRegistrationData({
-      ...registrationData,
-      last_name: e.target.value,
-    });
-  };
-
-  const emailChanged = (e: any) => {
-    setRegistrationData({
-      ...registrationData,
-      email: e.target.value,
-    });
-  };
-
-  const passwordChanged = (e: any) => {
-    setRegistrationData({
-      ...registrationData,
-      password: e.target.value,
-    });
-  };
-
-  const confirmPasswordChanged = (e: any) => {
-    setRegistrationData({
-      ...registrationData,
-      confirmPassword: e.target.value,
-    });
-  };
-
+const UserRegistrationPage: FC<UserRegisterProps> = ({
+  registerError,
+  registrationData,
+  signInClick,
+  userNameChanged,
+  firstNameChanged,
+  lastNameChanged,
+  emailChanged,
+  passwordChanged,
+  confirmPasswordChanged,
+}) => {
   return (
     <div className="container-fluid">
       <div className="row justify-content-center">
-        <div className="col-md-3">
+        <div className="col-lg-6">
           <div className="card">
             <h2 className="card-title text-center">Register</h2>
             <div className="card-body py-md-4">

@@ -9,31 +9,25 @@ interface HotelData {
   hotel: Hotel;
 }
 
-const HotelCard: FC<HotelData> = props => {
+const HotelCard: FC<HotelData> = ({ hotel }) => {
   return (
     <div className="col-md-3 py-2">
       <div className=" hotel-card card card-body h-100">
-        <img
-          className="card-img-top"
-          src={props.hotel.image}
-          alt="Card image"
-        />
-        <h4 className="card-title h-100">{props.hotel.name}</h4>
+        <img className="card-img-top" src={hotel.image} alt="Card image" />
+        <h4 className="card-title h-100">{hotel.name}</h4>
         <div>
           <label>Country:</label>
-          <span> {props.hotel.country}</span>
+          <span> {hotel.country}</span>
         </div>
         <div>
           <label>City:</label>
-          <span> {props.hotel.city}</span>
+          <span> {hotel.city}</span>
         </div>
         <div>
           <label>Stars:</label>
-          <span>{props.hotel.stars}</span>
+          <span>{hotel.stars}</span>
         </div>
-        <NavLink to={`${APP_ROUTES.dashboard}/${props.hotel.id}`}>
-          Details
-        </NavLink>
+        <NavLink to={`${APP_ROUTES.dashboard}/${hotel.id}`}>Details</NavLink>
       </div>
     </div>
   );

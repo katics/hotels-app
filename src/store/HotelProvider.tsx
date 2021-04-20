@@ -10,6 +10,7 @@ export interface HotelState {
   hotels: Hotels;
   user: UserData;
   hotelDetails: Hotel;
+  isLoading: boolean;
 }
 
 interface ContextProps {

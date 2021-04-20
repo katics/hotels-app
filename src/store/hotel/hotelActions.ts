@@ -3,7 +3,7 @@ import { Hotel } from "../../utils/types/Hotel";
 import { Hotels } from "../../utils/types/Hotels";
 import {
   ADD_HOTEL,
-  FETCH_HOTELS,
+  FETCH_HOTELS_REQUEST,
   FETCH_HOTELS_SUCCESS,
   FETCH_HOTEL_DETAILS,
   FETCH_HOTEL_DETAILS_SUCCESS,
@@ -15,7 +15,7 @@ export const addHotel = (hotel: Hotel): AnyAction => ({
 });
 
 export const fetchHotels = (token: string): AnyAction => ({
-  type: FETCH_HOTELS,
+  type: FETCH_HOTELS_REQUEST,
   payload: token,
 });
 

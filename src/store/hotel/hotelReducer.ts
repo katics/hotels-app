@@ -1,6 +1,6 @@
 import {
   ADD_HOTEL,
-  FETCH_HOTELS,
+  FETCH_HOTELS_REQUEST,
   FETCH_HOTELS_SUCCESS,
   FETCH_HOTEL_DETAILS_SUCCESS,
 } from "./hotelActionTypes";
@@ -31,7 +31,7 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
       return {
         ...state,
       };
-    case FETCH_HOTELS:
+    case FETCH_HOTELS_REQUEST:
       return {
         ...state,
       };

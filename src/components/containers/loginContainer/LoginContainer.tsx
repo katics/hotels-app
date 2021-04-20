@@ -12,6 +12,7 @@ import { APP_ROUTES } from "../../../utils/AppRoutes";
 import { UserLoginData } from "../../../utils/types/UserLoginData";
 import { useHistory } from "react-router";
 import LoginPage from "../../pages/loginPage/LoginPage";
+import { ILoginProps } from "../../../utils/props/LoginPageProps";
 
 const LoginContainer: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -52,15 +53,14 @@ const UserLogin: FC = () => {
     if (isLogged) history.push(APP_ROUTES.dashboard);
   }, [isLogged]);
 
-  return (
-    <LoginPage
-      loginData={loginData}
-      loginError={loginError}
-      signInClick={signInClick}
-      setUserName={setUserName}
-      setPassword={setPassword}
-    />
-  );
+  const loginProps: ILoginProps = {
+    loginData: loginData,
+    loginError: loginError,
+    signInClick: signInClick,
+    setUserName: setUserName,
+    setPassword: setPassword,
+  };
+  return <LoginPage loginProps={loginProps} />;
 };
 
 export default LoginContainer;
