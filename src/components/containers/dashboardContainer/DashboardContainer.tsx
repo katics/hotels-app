@@ -11,6 +11,7 @@ import HotelProvider, {
 import { fetchHotels } from "../../../store/hotel/hotelActions";
 import { userSeletor } from "../../../store/user/userSelector";
 import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+import Spinner from "../../spinner/Spinner";
 
 const DashboardPage: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -23,13 +24,13 @@ const DashboardContainer: FC = () => {
     hotelDispatch(fetchHotels(token));
   };
 
-  const { listOfHotels } = useSelectorHotel(hotelsSelector);
+  const { listOfHotels, isLoading } = useSelectorHotel(hotelsSelector);
   const { currentUser } = useSelectorHotel(userSeletor);
   const hotelDispatch = useDispatchHotel();
 
   return (
     <>
-      {listOfHotels ? (
+      {!isLoading ? (
         <DashboardLayout
           hotels={listOfHotels}
           title="List of all hotels"
@@ -37,7 +38,7 @@ const DashboardContainer: FC = () => {
           user={currentUser}
         />
       ) : (
-        <div>SPINNER</div>
+        <Spinner />
       )}
     </>
   );

@@ -4,13 +4,14 @@ import { AnyAction, Store } from "redux";
 import { Hotel } from "../utils/types/Hotel";
 
 import { Hotels } from "../utils/types/Hotels";
+import { Spinner } from "../utils/types/Spinner";
 import { UserData } from "../utils/types/UserData";
 
 export interface HotelState {
   hotels: Hotels;
   user: UserData;
   hotelDetails: Hotel;
-  isLoading: boolean;
+  spinner: Spinner;
 }
 
 interface ContextProps {

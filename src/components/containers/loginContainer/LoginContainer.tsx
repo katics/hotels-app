@@ -13,6 +13,8 @@ import { UserLoginData } from "../../../utils/types/UserLoginData";
 import { useHistory } from "react-router";
 import LoginPage from "../../pages/loginPage/LoginPage";
 import { ILoginProps } from "../../../utils/props/LoginPageProps";
+import { spinnerSelector } from "../../../store/spinner/spinnerSelector";
+import Spinner from "../../spinner/Spinner";
 
 const LoginContainer: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -24,10 +26,12 @@ const UserLogin: FC = () => {
   const history = useHistory();
 
   const userDispatch = useDispatchHotel();
-  const { loginError, isLogged } = useSelectorHotel(userSeletor);
-
+  const { loginError, isLogged, isLoading } = useSelectorHotel(userSeletor);
+  //const { isLoading } = useSelectorHotel(spinnerSelector);
   const userLoginData: UserLoginData = { username: "", password: "" };
   const [loginData, setLoginData] = useState(userLoginData);
+
+  const [spinner, setSpinner] = useState(isLoading);
 
   const setUserName = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginData({
@@ -35,7 +39,6 @@ const UserLogin: FC = () => {
       username: e.target.value,
     });
   };
-
   const setPassword = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginData({
       ...loginData,
@@ -45,12 +48,14 @@ const UserLogin: FC = () => {
 
   const signInClick = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginData);
     userDispatch(fetchLoginUser(loginData));
   };
+
   useEffect(() => {
     console.log("Redirect na loginu, user je logovan: " + isLogged.toString());
-    if (isLogged) history.push(APP_ROUTES.dashboard);
+    if (isLogged) {
+      history.push(APP_ROUTES.dashboard);
+    }
   }, [isLogged]);
 
   const loginProps: ILoginProps = {
@@ -60,7 +65,7 @@ const UserLogin: FC = () => {
     setUserName: setUserName,
     setPassword: setPassword,
   };
-  return <LoginPage loginProps={loginProps} />;
+  return <>{isLoading ? <Spinner /> : <LoginPage loginProps={loginProps} />}</>;
 };
 
 export default LoginContainer;

@@ -14,6 +14,7 @@ const initialState: UserData = {
   registerError: false,
   isLogged: false,
   hasRegisred: false,
+  isLoading: false,
   currentUser: {
     token: "",
     username: "",
@@ -27,19 +28,34 @@ const initialState: UserData = {
 const user = (state = initialState, action: any = {}): UserData => {
   switch (action.type) {
     case FETCH_LOGIN_USER:
-      return { ...state, loginError: false, registerError: false };
+      return {
+        ...state,
+        loginError: false,
+        registerError: false,
+        isLoading: true,
+      };
     case FETCH_LOGIN_USER_SUCCESS:
-      return { ...state, currentUser: action.payload, isLogged: true };
+      return {
+        ...state,
+        currentUser: action.payload,
+        isLogged: true,
+        isLoading: false,
+      };
     case FETCH_LOGIN_USER_ERROR:
-      return { ...state, loginError: true };
+      return { ...state, loginError: true, isLoading: false };
     case LOGOUT_USER:
       return initialState;
     case FETCH_REGISTER_USER:
-      return { ...state };
+      return { ...state, isLoading: true };
     case FETCH_REGISTER_USER_SUCCESS:
-      return { ...state, hasRegisred: true, registerError: false };
+      return {
+        ...state,
+        hasRegisred: true,
+        registerError: false,
+        isLoading: false,
+      };
     case FETCH_REGISTER_USER_ERROR:
-      return { ...state, registerError: true };
+      return { ...state, registerError: true, isLoading: false };
     default:
       return state;
   }

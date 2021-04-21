@@ -7,6 +7,7 @@ import {
   useSelectorHotel,
 } from "../../../store/HotelProvider";
 import HotelDetailsLayout from "../../layout/hotelDetailsLayout/HotelDetailsLayout";
+import Spinner from "../../spinner/Spinner";
 
 interface Params {
   hotelId: string;
@@ -14,7 +15,7 @@ interface Params {
 
 const HotelDetailsPage: FC = () => {
   //const history = useHistory();
-  const { hotelDetails } = useSelectorHotel(hotelsSelector);
+  const { hotelDetails, isLoading } = useSelectorHotel(hotelsSelector);
   const hotelDispatch = useDispatchHotel();
 
   const { hotelId } = useParams<Params>();
@@ -23,16 +24,22 @@ const HotelDetailsPage: FC = () => {
     hotelDispatch(fetchHotelDetails(hotelId));
   }, [hotelId]);
   return (
-    <HotelDetailsLayout
-      name={hotelDetails.name}
-      city={hotelDetails.city}
-      country={hotelDetails.country}
-      stars={hotelDetails.stars}
-      image={hotelDetails.image}
-      likes={hotelDetails.likes}
-      description={hotelDetails.description}
-      price={hotelDetails.price}
-    />
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <HotelDetailsLayout
+          name={hotelDetails.name}
+          city={hotelDetails.city}
+          country={hotelDetails.country}
+          stars={hotelDetails.stars}
+          image={hotelDetails.image}
+          likes={hotelDetails.likes}
+          description={hotelDetails.description}
+          price={hotelDetails.price}
+        />
+      )}
+    </>
   );
 };
 export default HotelDetailsPage;

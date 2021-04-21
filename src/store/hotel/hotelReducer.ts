@@ -2,6 +2,7 @@ import {
   ADD_HOTEL,
   FETCH_HOTELS_REQUEST,
   FETCH_HOTELS_SUCCESS,
+  FETCH_HOTEL_DETAILS,
   FETCH_HOTEL_DETAILS_SUCCESS,
 } from "./hotelActionTypes";
 import { Hotels } from "../../utils/types/Hotels";
@@ -23,6 +24,7 @@ const initialState: Hotels = {
     user: [],
     location: "",
   },
+  isLoading: false,
 };
 
 const hotel = (state = initialState, action: any = {}): Hotels => {
@@ -34,16 +36,24 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
     case FETCH_HOTELS_REQUEST:
       return {
         ...state,
+        isLoading: true,
       };
     case FETCH_HOTELS_SUCCESS:
       return {
         ...state,
         listOfHotels: action.payload,
+        isLoading: false,
+      };
+    case FETCH_HOTEL_DETAILS:
+      return {
+        ...state,
+        isLoading: true,
       };
     case FETCH_HOTEL_DETAILS_SUCCESS:
       return {
         ...state,
         hotelDetails: action.payload,
+        isLoading: false,
       };
     default:
       return state;

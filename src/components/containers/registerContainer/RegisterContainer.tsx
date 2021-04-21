@@ -10,6 +10,7 @@ import { fetchRegisterUser } from "../../../store/user/userActions";
 import { userSeletor } from "../../../store/user/userSelector";
 import { UserRegistrationData } from "../../../utils/types/UserRegistrationData";
 import UserRegistrationPage from "../../pages/registerPage/RegisterPage";
+import Spinner from "../../spinner/Spinner";
 
 const UserRegistrationContainer: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -19,7 +20,7 @@ const UserRegistrationContainer: FC = () => (
 
 const UserRegistration: FC = () => {
   const userDispatch = useDispatchHotel();
-  const { registerError } = useSelectorHotel(userSeletor);
+  const { registerError, isLoading } = useSelectorHotel(userSeletor);
 
   const userRegistrationData: UserRegistrationData = {
     username: "",
@@ -83,17 +84,23 @@ const UserRegistration: FC = () => {
   };
 
   return (
-    <UserRegistrationPage
-      registerError={registerError}
-      registrationData={registrationData}
-      signInClick={signInClick}
-      userNameChanged={userNameChanged}
-      firstNameChanged={firstNameChanged}
-      lastNameChanged={lastNameChanged}
-      emailChanged={emailChanged}
-      passwordChanged={passwordChanged}
-      confirmPasswordChanged={confirmPasswordChanged}
-    />
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <UserRegistrationPage
+          registerError={registerError}
+          registrationData={registrationData}
+          signInClick={signInClick}
+          userNameChanged={userNameChanged}
+          firstNameChanged={firstNameChanged}
+          lastNameChanged={lastNameChanged}
+          emailChanged={emailChanged}
+          passwordChanged={passwordChanged}
+          confirmPasswordChanged={confirmPasswordChanged}
+        />
+      )}
+    </>
   );
 };
 
