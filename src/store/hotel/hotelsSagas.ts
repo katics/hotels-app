@@ -1,0 +1,32 @@
+import { call, put, takeLatest } from "redux-saga/effects";
+
+import { fetchHotelDetailsAPI, fetchHotels } from "../../utils/api";
+import {
+  fetchHotelDetailsSuccess,
+  fetchHotelsError,
+  fetchHotelsSuccess,
+} from "./hotelActions";
+import { FETCH_HOTELS_REQUEST, FETCH_HOTEL_DETAILS } from "./hotelActionTypes";
+
+export function* fetchHotelsSaga(action: any): any {
+  try {
+    const response = yield call(fetchHotels, action.payload);
+    yield put(fetchHotelsSuccess(response.data));
+  } catch (err) {
+    yield put(fetchHotelsError());
+    console.log("ERROR" + err);
+  }
+}
+
+export function* fetchHotelDetails(action: any): any {
+  try {
+    const response = yield call(fetchHotelDetailsAPI, action.payload);
+    yield put(fetchHotelDetailsSuccess(response.data));
+  } catch (err) {
+    console.log(err);
+  }
+}
+export default function* hotelsSagas(): any {
+  yield takeLatest(FETCH_HOTELS_REQUEST, fetchHotelsSaga);
+  yield takeLatest(FETCH_HOTEL_DETAILS, fetchHotelDetails);
+}

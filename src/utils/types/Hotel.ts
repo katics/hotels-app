@@ -1,5 +1,15 @@
 export interface Hotel {
+  id: number;
   name: string;
-  // adress?: string;
-  // stars?: number;
+  city: string;
+  country: string;
+  image: string;
+  stars: number;
+  date: Date;
+  description: string;
+  price: number;
+  likes: number;
+  dislikes: number;
+  user: number[];
+  location: string;
 }
