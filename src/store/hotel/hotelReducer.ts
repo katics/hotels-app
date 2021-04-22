@@ -1,5 +1,6 @@
 import {
   ADD_HOTEL,
+  FETCH_HOTELS_ERROR,
   FETCH_HOTELS_REQUEST,
   FETCH_HOTELS_SUCCESS,
   FETCH_HOTEL_DETAILS,
@@ -42,6 +43,11 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
       return {
         ...state,
         listOfHotels: action.payload,
+        isLoading: false,
+      };
+    case FETCH_HOTELS_ERROR:
+      return {
+        ...state,
         isLoading: false,
       };
     case FETCH_HOTEL_DETAILS:

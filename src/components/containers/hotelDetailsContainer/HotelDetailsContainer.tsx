@@ -14,7 +14,8 @@ interface Params {
 }
 
 const HotelDetailsPage: FC = () => {
-  //const history = useHistory();
+  const history = useHistory();
+
   const { hotelDetails, isLoading } = useSelectorHotel(hotelsSelector);
   const hotelDispatch = useDispatchHotel();
 
@@ -23,6 +24,10 @@ const HotelDetailsPage: FC = () => {
   useEffect(() => {
     hotelDispatch(fetchHotelDetails(hotelId));
   }, [hotelId]);
+
+  const goBack = () => {
+    history.goBack();
+  };
   return (
     <>
       {isLoading ? (
@@ -37,6 +42,7 @@ const HotelDetailsPage: FC = () => {
           likes={hotelDetails.likes}
           description={hotelDetails.description}
           price={hotelDetails.price}
+          goBack={goBack}
         />
       )}
     </>

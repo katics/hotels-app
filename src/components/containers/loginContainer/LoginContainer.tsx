@@ -13,7 +13,6 @@ import { UserLoginData } from "../../../utils/types/UserLoginData";
 import { useHistory } from "react-router";
 import LoginPage from "../../pages/loginPage/LoginPage";
 import { ILoginProps } from "../../../utils/props/LoginPageProps";
-import { spinnerSelector } from "../../../store/spinner/spinnerSelector";
 import Spinner from "../../spinner/Spinner";
 
 const LoginContainer: FC = () => (

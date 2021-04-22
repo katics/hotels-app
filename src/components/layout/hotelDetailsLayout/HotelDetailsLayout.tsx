@@ -1,4 +1,5 @@
 import { FC } from "react";
+import CustomButton from "../../Button/Button";
 
 import "./HotelDetailsLayout.scss";
 interface hotelDetailsProps {
@@ -10,6 +11,7 @@ interface hotelDetailsProps {
   likes: number;
   description: string;
   price: number;
+  goBack: () => void;
 }
 const HotelDetailsLayout: FC<hotelDetailsProps> = ({
   name,
@@ -20,12 +22,16 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
   likes,
   description,
   price,
+  goBack,
 }) => {
   return (
     <div className="col-sm-12 col-lg-12">
       <div className="hotel-details py-2 px-2 row h-100">
         <div className="col-sm-4">
           <img className="hotel-img img-fluid" src={image} alt={name}></img>
+          <div className="py-3">
+            <CustomButton title="Go Back" handleClick={goBack} />
+          </div>
         </div>
         <div className="col-sm-8">
           <div className="text-center">
@@ -58,10 +64,7 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
               </div>
             </div>
             <div className="col-lg-8">
-              <button className="btn btn-info float-left">Back</button>
-              <button className="btn btn-primary float-right">
-                Add to favorites
-              </button>
+              <button className="btn btn-primary">Add to favorites</button>
             </div>
           </div>
         </div>

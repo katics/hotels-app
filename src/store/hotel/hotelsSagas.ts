@@ -1,7 +1,11 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 
 import { fetchHotelDetailsAPI, fetchHotels } from "../../utils/api";
-import { fetchHotelDetailsSuccess, fetchHotelsSuccess } from "./hotelActions";
+import {
+  fetchHotelDetailsSuccess,
+  fetchHotelsError,
+  fetchHotelsSuccess,
+} from "./hotelActions";
 import { FETCH_HOTELS_REQUEST, FETCH_HOTEL_DETAILS } from "./hotelActionTypes";
 
 export function* fetchHotelsSaga(action: any): any {
@@ -9,6 +13,7 @@ export function* fetchHotelsSaga(action: any): any {
     const response = yield call(fetchHotels, action.payload);
     yield put(fetchHotelsSuccess(response.data));
   } catch (err) {
+    yield put(fetchHotelsError());
     console.log("ERROR" + err);
   }
 }

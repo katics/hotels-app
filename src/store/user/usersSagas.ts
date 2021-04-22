@@ -12,9 +12,14 @@ import {
   response_status_created,
 } from "../../utils/api";
 
+import { SaveToLoalStorage } from "../../utils/common/LocalStorage";
+import { TOKEN_LS_NAME } from "../../utils/common/constantNames";
+
 export function* getUserTokenAPI(action: any): any {
   try {
     const response = yield call(userLogin, action.payload);
+
+    SaveToLoalStorage(TOKEN_LS_NAME, response.data.token);
     yield put(fetchLoginUserSuccess(response.data));
   } catch (err) {
     yield put(fetchloginUserError((err = true)));

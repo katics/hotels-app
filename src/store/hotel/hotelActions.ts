@@ -3,6 +3,7 @@ import { Hotel } from "../../utils/types/Hotel";
 import { Hotels } from "../../utils/types/Hotels";
 import {
   ADD_HOTEL,
+  FETCH_HOTELS_ERROR,
   FETCH_HOTELS_REQUEST,
   FETCH_HOTELS_SUCCESS,
   FETCH_HOTEL_DETAILS,
@@ -22,6 +23,10 @@ export const fetchHotels = (token: string): AnyAction => ({
 export const fetchHotelsSuccess = (hotels: Hotels): AnyAction => ({
   type: FETCH_HOTELS_SUCCESS,
   payload: hotels,
+});
+
+export const fetchHotelsError = (): AnyAction => ({
+  type: FETCH_HOTELS_ERROR,
 });
 
 export const fetchHotelDetails = (hotelId: string): AnyAction => ({
