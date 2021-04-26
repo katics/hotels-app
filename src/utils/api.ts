@@ -1,5 +1,6 @@
 import axios from "axios";
 import { TOKEN_LS_NAME } from "./common/constantNames";
+import { FavouriteHotelRequest } from "./types/FavouriteHotelRequest";
 import { UserLoginData } from "./types/UserLoginData";
 import { UserRegistrationData } from "./types/UserRegistrationData";
 
@@ -48,13 +49,10 @@ export const registerUser = (registerUserData: UserRegistrationData): any => {
   });
 };
 
-export const fetchHotels = (token: string): any => {
+export const fetchHotels = (): any => {
   return axios({
     url: apiUrl + "/hotel_api/",
     method: "GET",
-    // headers: {
-    //   //Authorization: `Token ${token}`,
-    // },
   }).catch(err => {
     console.log(err);
   });
@@ -64,9 +62,19 @@ export const fetchHotelDetailsAPI = (hotelId: string): any => {
   return axios({
     url: apiUrl + "/hotel_api/" + hotelId,
     method: "GET",
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+export const toggleFavouritesAPI = (request: FavouriteHotelRequest): any => {
+  return axios({
+    url: apiUrl + "/favorites/add_remove",
+    method: "POST",
     headers: {
-      //Authorization: `Token fc6de7f1196b776fad0929fd44a5b93eb77aa4c3`, //TODO!!!!
+      "Content-Type": "application/json",
     },
+    data: JSON.stringify(request),
   }).catch(err => {
     console.log(err);
   });

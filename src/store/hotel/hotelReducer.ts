@@ -1,5 +1,6 @@
 import {
   ADD_HOTEL,
+  ADD_REMOVE_USER_FAVOURITES,
   FETCH_HOTELS_ERROR,
   FETCH_HOTELS_REQUEST,
   FETCH_HOTELS_SUCCESS,
@@ -60,6 +61,11 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
         ...state,
         hotelDetails: action.payload,
         isLoading: false,
+      };
+    case ADD_REMOVE_USER_FAVOURITES:
+      return {
+        ...state,
+        listOfHotels: action.payload,
       };
     default:
       return state;

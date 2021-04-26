@@ -1,13 +1,16 @@
 import { AnyAction } from "redux";
+import { FavouriteHotelRequest } from "../../utils/types/FavouriteHotelRequest";
 import { Hotel } from "../../utils/types/Hotel";
 import { Hotels } from "../../utils/types/Hotels";
 import {
   ADD_HOTEL,
+  ADD_REMOVE_USER_FAVOURITES,
   FETCH_HOTELS_ERROR,
   FETCH_HOTELS_REQUEST,
   FETCH_HOTELS_SUCCESS,
   FETCH_HOTEL_DETAILS,
   FETCH_HOTEL_DETAILS_SUCCESS,
+  TOGGLE_FAVOURITES_REQUEST,
 } from "./hotelActionTypes";
 
 export const addHotel = (hotel: Hotel): AnyAction => ({
@@ -15,9 +18,8 @@ export const addHotel = (hotel: Hotel): AnyAction => ({
   hotel,
 });
 
-export const fetchHotels = (token: string): AnyAction => ({
+export const fetchHotels = (): AnyAction => ({
   type: FETCH_HOTELS_REQUEST,
-  payload: token,
 });
 
 export const fetchHotelsSuccess = (hotels: Hotels): AnyAction => ({
@@ -37,4 +39,13 @@ export const fetchHotelDetails = (hotelId: string): AnyAction => ({
 export const fetchHotelDetailsSuccess = (hotel: Hotel): AnyAction => ({
   type: FETCH_HOTEL_DETAILS_SUCCESS,
   payload: hotel,
+});
+
+export const favouriteHotels = (data: FavouriteHotelRequest): AnyAction => ({
+  type: TOGGLE_FAVOURITES_REQUEST,
+  payload: data,
+});
+export const addRemoveUserFromFav = (listOfHotels: Hotel[]): AnyAction => ({
+  type: ADD_REMOVE_USER_FAVOURITES,
+  payload: listOfHotels,
 });

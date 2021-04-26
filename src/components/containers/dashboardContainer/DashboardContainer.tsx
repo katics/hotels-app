@@ -8,10 +8,16 @@ import HotelProvider, {
   hotelContext,
 } from "../../../store/HotelProvider";
 
-import { fetchHotels } from "../../../store/hotel/hotelActions";
+import {
+  addRemoveUserFromFav,
+  fetchHotels,
+  favouriteHotels,
+} from "../../../store/hotel/hotelActions";
 import { userSeletor } from "../../../store/user/userSelector";
 import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import Spinner from "../../spinner/Spinner";
+import { FavouriteHotelRequest } from "../../../utils/types/FavouriteHotelRequest";
+import { Hotel } from "../../../utils/types/Hotel";
 
 const DashboardPage: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -20,22 +26,47 @@ const DashboardPage: FC = () => (
 );
 
 const DashboardContainer: FC = () => {
-  const fetchHotelForCurrentUser = (token: string) => {
-    hotelDispatch(fetchHotels(token));
+  const fetchHotelForCurrentUser = () => {
+    hotelDispatch(fetchHotels());
   };
 
   const { listOfHotels, isLoading } = useSelectorHotel(hotelsSelector);
   const { currentUser } = useSelectorHotel(userSeletor);
   const hotelDispatch = useDispatchHotel();
 
+  const addRemoveUserFromHotels = (hotelid: number, userId: number) => {
+    const hotels = listOfHotels.map(hotel => {
+      if (hotel.id === hotelid) {
+        if (hotel.user.includes(userId)) {
+          hotel.user = hotel.user.filter(user => {
+            user !== userId;
+          });
+        } else {
+          hotel.user.push(userId);
+        }
+      }
+      return hotel;
+    });
+    hotelDispatch(addRemoveUserFromFav(hotels));
+  };
+
+  const addRemoveFavHotel = (hotelId: number, isFavorite: boolean) => {
+    const favHotel: FavouriteHotelRequest = {
+      hotel_id: hotelId,
+      is_favorite: isFavorite,
+    };
+    addRemoveUserFromHotels(hotelId, currentUser.user_id);
+    hotelDispatch(favouriteHotels(favHotel));
+  };
   return (
     <>
       {!isLoading ? (
         <DashboardLayout
           hotels={listOfHotels}
           title="List of all hotels"
-          fetchHotels={token => fetchHotelForCurrentUser(token)}
+          fetchHotels={() => fetchHotelForCurrentUser()}
           user={currentUser}
+          addRemoveFavHotel={addRemoveFavHotel}
         />
       ) : (
         <Spinner />

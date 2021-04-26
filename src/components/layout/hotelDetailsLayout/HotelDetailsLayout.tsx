@@ -27,21 +27,18 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
   return (
     <div className="col-sm-12 col-lg-12">
       <div className="hotel-details py-2 px-2 row h-100">
-        <div className="col-sm-4">
+        <div className="col-sm-4 py-2 px-2">
           <img className="hotel-img img-fluid" src={image} alt={name}></img>
-          <div className="py-3">
-            <CustomButton title="Go Back" handleClick={goBack} />
-          </div>
         </div>
         <div className="col-sm-8">
           <div className="text-center">
             <h3>{name}</h3>
           </div>
           <div className="row">
-            <div className="description col-sm-10">
+            <div className="description col-sm-9">
               <p>{description}</p>
             </div>
-            <div className="details col-sm-2">
+            <div className="details col-sm-3">
               <div className="hotel-stars">
                 <label>Stars: </label>
                 <label className="float-right"> {stars}</label>
@@ -63,8 +60,8 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
                 <label className="float-right">{price} RSD</label>
               </div>
             </div>
-            <div className="col-lg-8">
-              <button className="btn btn-primary">Add to favorites</button>
+            <div className="py-3">
+              <CustomButton title="Go Back" handleClick={goBack} />
             </div>
           </div>
         </div>
