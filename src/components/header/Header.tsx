@@ -36,6 +36,11 @@ const Header: FC = () => {
         </NavLink>
       </li>
       <li>
+        <NavLink className="nav-link text-light" to={APP_ROUTES.favHotelsPage}>
+          Favourites
+        </NavLink>
+      </li>
+      <li>
         <div className="nav-link text-light logout-link" onClick={logout}>
           Logout
         </div>

@@ -2,6 +2,7 @@ import { ReactNode, FC } from "react";
 
 import Header from "../header/Header";
 import "./Layout.scss";
+import "toastr/build/toastr.css";
 
 interface Props {
   children?: ReactNode;

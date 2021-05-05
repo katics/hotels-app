@@ -4,6 +4,7 @@ export const APP_ROUTES = {
   hotelDetails: "/dashboard/:hotelId",
   registerPage: "/register",
   pageNotFound: "/pageNotFound",
+  favHotelsPage: "/favourites",
 };
 
 export const COMPONENT_PAGES = {
@@ -12,6 +13,7 @@ export const COMPONENT_PAGES = {
   hotelDetails: "HotelDetails",
   registerPage: "RegisterPage",
   pageNotFound: "PageNotFound",
+  favHotelsPage: "FavHotelsPage",
 };
 
 export const ROUTE_COMPONENTS = [
@@ -37,6 +39,12 @@ export const ROUTE_COMPONENTS = [
     path: APP_ROUTES.registerPage,
     component: COMPONENT_PAGES.registerPage,
     title: "Register",
+    protected: false,
+  },
+  {
+    path: APP_ROUTES.favHotelsPage,
+    component: COMPONENT_PAGES.favHotelsPage,
+    title: "Favourite Hotels",
     protected: false,
   },
   {

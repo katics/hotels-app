@@ -68,13 +68,23 @@ export const fetchHotelDetailsAPI = (hotelId: string): any => {
 };
 
 export const toggleFavouritesAPI = (request: FavouriteHotelRequest): any => {
+  const { userID, ...requestAPI } = request;
   return axios({
     url: apiUrl + "/favorites/add_remove",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    data: JSON.stringify(request),
+    data: JSON.stringify(requestAPI),
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+export const fetchFavHotelsAPI = (): any => {
+  return axios({
+    url: apiUrl + "/favorites",
+    method: "GET",
   }).catch(err => {
     console.log(err);
   });

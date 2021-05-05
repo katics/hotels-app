@@ -5,6 +5,7 @@ import DashboardPage from "../components/containers/dashboardContainer/Dashboard
 import LoginContainer from "../components/containers/loginContainer/LoginContainer";
 import PageNotFound from "../components/pages/pageNotFound/PageNotFound";
 import UserRegistrationPage from "../components/containers/registerContainer/RegisterContainer";
+import favHotelsPage from "../components/containers/favouriteHotelsContainer/FavouriteHotelsContainer";
 import { APP_ROUTES, COMPONENT_PAGES, ROUTE_COMPONENTS } from "./AppRoutes";
 import HotelProvider, {
   hotelContext,
@@ -21,6 +22,7 @@ const components = {
   [COMPONENT_PAGES.loginPage]: LoginContainer,
   [COMPONENT_PAGES.registerPage]: UserRegistrationPage,
   [COMPONENT_PAGES.pageNotFound]: PageNotFound,
+  [COMPONENT_PAGES.favHotelsPage]: favHotelsPage,
 };
 
 const RouteCreatorProvider: FC = () => {

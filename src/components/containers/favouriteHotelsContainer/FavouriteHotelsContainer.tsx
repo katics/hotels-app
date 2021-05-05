@@ -1,37 +1,35 @@
 import { FC } from "react";
 
+import context from "react-bootstrap/esm/AccordionContext";
 import store from "../../../store";
+import {
+  favouriteHotels,
+  fetchFavHotels,
+} from "../../../store/hotel/hotelActions";
 import { hotelsSelector } from "../../../store/hotel/hotelSelector";
 import HotelProvider, {
   useDispatchHotel,
   useSelectorHotel,
-  hotelContext,
 } from "../../../store/HotelProvider";
-
-import {
-  fetchHotels,
-  favouriteHotels,
-} from "../../../store/hotel/hotelActions";
 import { userSeletor } from "../../../store/user/userSelector";
+import { FavouriteHotelRequest } from "../../../utils/types/FavouriteHotelRequest";
 import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import Spinner from "../../spinner/Spinner";
-import { FavouriteHotelRequest } from "../../../utils/types/FavouriteHotelRequest";
 
-const DashboardPage: FC = () => (
-  <HotelProvider store={store} context={hotelContext}>
-    <DashboardContainer />
+const FavHotelsPage: FC = () => (
+  <HotelProvider store={store} context={context}>
+    <FavHotelsContainer />
   </HotelProvider>
 );
 
-const DashboardContainer: FC = () => {
-  const fetchHotelForCurrentUser = () => {
-    hotelDispatch(fetchHotels());
-  };
-
-  const { listOfHotels, isLoading } = useSelectorHotel(hotelsSelector);
+const FavHotelsContainer: FC = () => {
+  const { favHotels, isLoading } = useSelectorHotel(hotelsSelector);
   const { currentUser } = useSelectorHotel(userSeletor);
   const hotelDispatch = useDispatchHotel();
 
+  const fetchFavHotelsForCurrentUser = () => {
+    hotelDispatch(fetchFavHotels());
+  };
   const addRemoveFavHotel = (hotelId: number, isFavorite: boolean) => {
     const favHotel: FavouriteHotelRequest = {
       hotel_id: hotelId,
@@ -40,13 +38,14 @@ const DashboardContainer: FC = () => {
     };
     hotelDispatch(favouriteHotels(favHotel));
   };
+
   return (
     <>
       {!isLoading ? (
         <DashboardLayout
-          hotels={listOfHotels}
-          title="List of all hotels"
-          fetchHotels={() => fetchHotelForCurrentUser()}
+          hotels={favHotels}
+          title="Favourite Hotels"
+          fetchHotels={() => fetchFavHotelsForCurrentUser()}
           user={currentUser}
           addRemoveFavHotel={addRemoveFavHotel}
         />
@@ -57,4 +56,4 @@ const DashboardContainer: FC = () => {
   );
 };
 
-export default DashboardPage;
+export default FavHotelsPage;
