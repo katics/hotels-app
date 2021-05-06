@@ -30,8 +30,6 @@ const UserLogin: FC = () => {
   const userLoginData: UserLoginData = { username: "", password: "" };
   const [loginData, setLoginData] = useState(userLoginData);
 
-  const [spinner, setSpinner] = useState(isLoading);
-
   const setUserName = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginData({
       ...loginData,
@@ -51,7 +49,6 @@ const UserLogin: FC = () => {
   };
 
   useEffect(() => {
-    console.log("Redirect na loginu, user je logovan: " + isLogged.toString());
     if (isLogged) {
       history.push(APP_ROUTES.dashboard);
     }

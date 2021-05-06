@@ -1,4 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+import * as toastr from "toastr";
 import {
   fetchloginUserError,
   fetchLoginUserSuccess,
@@ -30,9 +31,10 @@ export function* registerUserAPI(action: any): any {
   try {
     const response = yield call(registerUser, action.payload);
     if (response) {
-      if (response.status === response_status_created)
+      if (response.statusText === response_status_created) {
         yield put(fetchRegisterUserSucces());
-      else {
+        toastr.success("User registered");
+      } else {
         const registerError = true;
         yield put(fetchRegisterUserError(registerError));
       }

@@ -1,4 +1,5 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 
 import store from "../../../store";
 import HotelProvider, {
@@ -8,6 +9,7 @@ import HotelProvider, {
 } from "../../../store/HotelProvider";
 import { fetchRegisterUser } from "../../../store/user/userActions";
 import { userSeletor } from "../../../store/user/userSelector";
+import { APP_ROUTES } from "../../../utils/AppRoutes";
 import { UserRegistrationData } from "../../../utils/types/UserRegistrationData";
 import UserRegistrationPage from "../../pages/registerPage/RegisterPage";
 import Spinner from "../../spinner/Spinner";
@@ -19,8 +21,11 @@ const UserRegistrationContainer: FC = () => (
 );
 
 const UserRegistration: FC = () => {
+  const history = useHistory();
   const userDispatch = useDispatchHotel();
-  const { registerError, isLoading } = useSelectorHotel(userSeletor);
+  const { registerError, hasRegisred, isLoading } = useSelectorHotel(
+    userSeletor
+  );
 
   const userRegistrationData: UserRegistrationData = {
     username: "",
@@ -82,7 +87,9 @@ const UserRegistration: FC = () => {
       confirmPassword: e.target.value,
     });
   };
-
+  useEffect(() => {
+    if (hasRegisred) history.push(APP_ROUTES.loginPage);
+  }, [hasRegisred]);
   return (
     <>
       {isLoading ? (
