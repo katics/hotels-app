@@ -32,6 +32,7 @@ const initialState: Hotels = {
   },
   favHotels: [],
   isLoading: false,
+  isFavouriteFetched: false,
 };
 
 const hotel = (state = initialState, action: any = {}): Hotels => {
@@ -78,6 +79,7 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
         ...state,
         favHotels: action.payload,
         isLoading: false,
+        isFavouriteFetched: true,
       };
 
     case FETCH_FAV_HOTELS_ERROR:
@@ -103,7 +105,8 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
         favHotels: FavHotels(
           state.favHotels,
           state.listOfHotels,
-          action.payload
+          action.payload,
+          state.isFavouriteFetched
         ),
       };
     default:
@@ -111,7 +114,12 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
   }
 };
 
-const FavHotels = (favHotels: Hotel[], hotels: Hotel[], payload: any): any => {
+const FavHotels = (
+  favHotels: Hotel[],
+  hotels: Hotel[],
+  payload: any,
+  isFavFetched: boolean
+): any => {
   const favHotel = favHotels.find(fHotel => fHotel.id === payload.hotel_id);
   if (favHotel) {
     if (payload.is_favorite) {
@@ -119,7 +127,7 @@ const FavHotels = (favHotels: Hotel[], hotels: Hotel[], payload: any): any => {
     } else {
       favHotels = favHotels.filter(e => e.id !== favHotel.id);
     }
-  } else {
+  } else if (isFavFetched) {
     const hotel = hotels.find(h => h.id === payload.hotel_id);
     if (hotel) {
       favHotels.push(hotel);
