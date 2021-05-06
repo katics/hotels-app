@@ -12,6 +12,7 @@ import HotelProvider, {
 import { logoutUser } from "../../store/user/userActions";
 import { userSeletor } from "../../store/user/userSelector";
 import { APP_ROUTES } from "../../utils/AppRoutes";
+import { resetHotelState } from "../../store/hotel/hotelActions";
 
 const HeaderContainer: FC = () => (
   <HotelProvider store={store} context={hotelContext}>
@@ -26,6 +27,7 @@ const Header: FC = () => {
 
   const logout = () => {
     userDispatch(logoutUser());
+    userDispatch(resetHotelState());
     history.push(APP_ROUTES.loginPage);
   };
   const userLoggedInNaigation = (

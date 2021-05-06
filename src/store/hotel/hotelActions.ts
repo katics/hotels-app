@@ -14,6 +14,7 @@ import {
   FETCH_HOTEL_DETAILS_SUCCESS,
   TOGGLE_FAVOURITES_REQUEST,
   ADD_REMOVE_FAV_HOTEL,
+  RESET_HOTEL_STATE,
 } from "./hotelActionTypes";
 
 export const addHotel = (hotel: Hotel): AnyAction => ({
@@ -58,6 +59,10 @@ export const fetchHotelDetailsSuccess = (hotel: Hotel): AnyAction => ({
 export const favouriteHotels = (data: FavouriteHotelRequest): AnyAction => ({
   type: TOGGLE_FAVOURITES_REQUEST,
   payload: data,
+});
+
+export const resetHotelState = (): AnyAction => ({
+  type: RESET_HOTEL_STATE,
 });
 
 export const addRemoveFavHotel = (

@@ -9,6 +9,7 @@ import {
   FETCH_HOTELS_SUCCESS,
   FETCH_HOTEL_DETAILS,
   FETCH_HOTEL_DETAILS_SUCCESS,
+  RESET_HOTEL_STATE,
 } from "./hotelActionTypes";
 import { Hotels } from "../../utils/types/Hotels";
 import { Hotel } from "../../utils/types/Hotel";
@@ -87,6 +88,8 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
         ...state,
         isLoading: false,
       };
+    case RESET_HOTEL_STATE:
+      return initialState;
     case ADD_REMOVE_FAV_HOTEL:
       return {
         ...state,
