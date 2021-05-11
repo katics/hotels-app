@@ -93,19 +93,8 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
     case ADD_REMOVE_FAV_HOTEL:
       return {
         ...state,
-        listOfHotels: state.listOfHotels.map(hotel => {
-          if (hotel.id === action.payload.hotel_id) {
-            if (action.payload.is_favorite) {
-              hotel.user.push(action.payload.userID);
-            } else {
-              hotel.user = hotel.user.filter(
-                user => user !== action.payload.userID
-              );
-            }
-          }
-          return hotel;
-        }),
-        favHotels: FavHotels(
+        listOfHotels: hotelsList(state.listOfHotels, action.payload),
+        favHotels: favHotels(
           state.favHotels,
           state.listOfHotels,
           action.payload,
@@ -116,8 +105,20 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
       return state;
   }
 };
+const hotelsList = (hotelsList: Hotel[], payload: any): any => {
+  hotelsList.map(hotel => {
+    if (hotel.id === payload.hotel_id) {
+      if (payload.is_favorite) {
+        hotel.user.push(payload.userID);
+      } else {
+        hotel.user = hotel.user.filter(user => user !== payload.userID);
+      }
+    }
+    return hotel;
+  });
+};
 
-const FavHotels = (
+const favHotels = (
   favHotels: Hotel[],
   hotels: Hotel[],
   payload: any,
