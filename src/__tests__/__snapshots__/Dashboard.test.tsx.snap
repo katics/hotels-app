@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Page Should match dashboard page snapshot 1`] = `
+<div
+  class="col-md-12 col-lg-12"
+>
+  <div
+    class="row"
+  >
+    <div>
+      <button
+        class="btn btn-primary"
+      >
+        List of all hotels
+      </button>
+    </div>
+  </div>
+</div>
+`;

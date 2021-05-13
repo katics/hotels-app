@@ -116,6 +116,7 @@ const hotelsList = (hotelsList: Hotel[], payload: any): any => {
     }
     return hotel;
   });
+  return hotelsList;
 };
 
 const favHotels = (

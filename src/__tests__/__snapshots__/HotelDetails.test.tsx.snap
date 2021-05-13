@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hotel Details Page Should match hotel details page snapshot 1`] = `
+<div
+  class="spinner-border text-primary spinner-border-lg"
+/>
+`;

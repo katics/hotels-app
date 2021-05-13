@@ -1,6 +1,5 @@
 import { FC } from "react";
 
-import context from "react-bootstrap/esm/AccordionContext";
 import store from "../../../store";
 import {
   favouriteHotels,
@@ -8,6 +7,7 @@ import {
 } from "../../../store/hotel/hotelActions";
 import { hotelsSelector } from "../../../store/hotel/hotelSelector";
 import HotelProvider, {
+  hotelContext,
   useDispatchHotel,
   useSelectorHotel,
 } from "../../../store/HotelProvider";
@@ -17,7 +17,7 @@ import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import Spinner from "../../spinner/Spinner";
 
 const FavHotelsPage: FC = () => (
-  <HotelProvider store={store} context={context}>
+  <HotelProvider store={store} context={hotelContext}>
     <FavHotelsContainer />
   </HotelProvider>
 );

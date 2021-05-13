@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register Page Should match register page snapshot 1`] = `
+<div
+  class="container-fluid"
+>
+  <div
+    class="row justify-content-center"
+  >
+    <div
+      class="col-lg-6"
+    >
+      <div
+        class="card"
+      >
+        <h2
+          class="card-title text-center"
+        >
+          Register
+        </h2>
+        <div
+          class="card-body py-md-4"
+        >
+          <form
+            autocomplete="off"
+          >
+            <div
+              class="form-group"
+            >
+              <label>
+                User Name
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="form-group"
+            >
+              <label>
+                First Name
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="form-group"
+            >
+              <label>
+                Last Name
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="form-group"
+            >
+              <label>
+                Email
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="form-group"
+            >
+              <label>
+                Password
+              </label>
+              <input
+                class="form-control"
+                type="password"
+                value=""
+              />
+            </div>
+            <div
+              class="form-group"
+            >
+              <label>
+                Confirm Password
+              </label>
+              <input
+                class="form-control"
+                type="password"
+                value=""
+              />
+            </div>
+            <div
+              class="d-flex flex-row align-items-center justify-content-between"
+            >
+              <button
+                class="btn btn-primary btn-block"
+              >
+                Create Account
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
