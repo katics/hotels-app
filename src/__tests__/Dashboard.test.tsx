@@ -12,4 +12,12 @@ describe("Dashboard Page", () => {
     );
     expect(container.firstChild).toMatchSnapshot();
   });
+  it("should show list of hotels after user clicked like hotel", () => {
+    const { container } = render(
+      <StaticRouter>
+        <DashboardContainer />
+      </StaticRouter>
+    );
+    expect(container.firstChild).toBeInTheDocument;
+  });
 });

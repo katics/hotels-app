@@ -35,7 +35,12 @@ const HotelCard: FC<HotelData> = ({ hotel, userId, addRemoveFavHotel }) => {
   return (
     <div className="col-md-3 py-2">
       <div className=" hotel-card card card-body h-100">
-        <img className="card-img-top" src={hotel.image} alt="Card image" />
+        <img
+          className="card-img-top"
+          data-testid="HotelCardImgTestId"
+          src={hotel.image}
+          alt="Card image"
+        />
         <h4 className="card-title h-100">{hotel.name}</h4>
         <LabelSpanSet labelTitle="Country:" spanValue={hotel.country} />
         <LabelSpanSet labelTitle="City:" spanValue={hotel.city} />
