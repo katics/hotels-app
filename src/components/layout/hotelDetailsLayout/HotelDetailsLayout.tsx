@@ -28,7 +28,12 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
     <div className="col-sm-12 col-lg-12">
       <div className="hotel-details py-2 px-2 row h-100">
         <div className="col-sm-4 py-2 px-2">
-          <img className="hotel-img img-fluid" src={image} alt={name}></img>
+          <img
+            data-testid="HotelDetailsImgTestId"
+            className="hotel-img img-fluid"
+            src={image}
+            alt={name}
+          ></img>
         </div>
         <div className="col-sm-8">
           <div className="text-center">
