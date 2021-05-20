@@ -31,4 +31,20 @@ describe("Hotel Details Page", () => {
     expect(screen.queryByText(singleHotel.stars)).toBeInTheDocument();
     expect(screen.queryByText(singleHotel.name)).toBeInTheDocument();
   });
+  it("Should display image in details page", async () => {
+    const hotelDetails = render(
+      <StaticRouter>
+        <HotelDetailsLayout
+          {...singleHotel}
+          goBack={() => {
+            return true;
+          }}
+        />
+      </StaticRouter>
+    );
+    const hotelDetailsImage: any = await hotelDetails.findByTestId(
+      "HotelDetailsImgTestId"
+    );
+    expect(hotelDetailsImage.src).toContain(singleHotel.image);
+  });
 });
