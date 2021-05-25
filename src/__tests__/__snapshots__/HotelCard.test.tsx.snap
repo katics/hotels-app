@@ -49,7 +49,7 @@ exports[`Hootel Card Should match snapshot 1`] = `
       <a
         href="/dashboard/42"
       >
-        Details
+        More Details
       </a>
        
       <div

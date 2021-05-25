@@ -63,7 +63,9 @@ const HotelCard: FC<HotelData> = ({ hotel, userId, addRemoveFavHotel }) => {
         <LabelSpanSet labelTitle="City:" spanValue={hotel.city} />
         <LabelSpanSet labelTitle="Stars:" spanValue={hotel.stars.toString()} />
         <div>
-          <NavLink to={`${APP_ROUTES.dashboard}/${hotel.id}`}>Details</NavLink>{" "}
+          <NavLink to={`${APP_ROUTES.dashboard}/${hotel.id}`}>
+            More Details
+          </NavLink>{" "}
           {favIcon}
         </div>
       </div>

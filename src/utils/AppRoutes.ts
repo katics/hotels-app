@@ -45,7 +45,7 @@ export const ROUTE_COMPONENTS = [
     path: APP_ROUTES.favHotelsPage,
     component: COMPONENT_PAGES.favHotelsPage,
     title: "Favourite Hotels",
-    protected: false,
+    protected: true,
   },
   {
     path: APP_ROUTES.pageNotFound,
