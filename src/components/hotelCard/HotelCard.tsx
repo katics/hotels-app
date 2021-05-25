@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { APP_ROUTES } from "../../utils/AppRoutes";
@@ -7,7 +7,6 @@ import { Heart, HeartFill } from "react-bootstrap-icons";
 import { Hotel } from "../../utils/types/Hotel";
 import "./HotelCard.scss";
 import LabelSpanSet from "../labelSpanSet/LabelSpanSet";
-
 interface HotelData {
   hotel: Hotel;
   userId: number;
@@ -16,6 +15,24 @@ interface HotelData {
 
 const HotelCard: FC<HotelData> = ({ hotel, userId, addRemoveFavHotel }) => {
   const isFavorite = hotel.user.includes(userId);
+
+  const checkImgUrl = (imgUrl: string) => {
+    return imgUrl.includes("http://") ? true : false;
+  };
+
+  const generateImgUrl = (image: string) => {
+    return (
+      window.location.protocol +
+      "//" +
+      window.location.hostname +
+      ":8000" +
+      image
+    );
+  };
+
+  const [hotelImg] = useState(() => {
+    return checkImgUrl(hotel.image) ? hotel.image : generateImgUrl(hotel.image);
+  });
 
   const favIcon = isFavorite ? (
     <div
@@ -38,7 +55,7 @@ const HotelCard: FC<HotelData> = ({ hotel, userId, addRemoveFavHotel }) => {
         <img
           className="card-img-top"
           data-testid="HotelCardImgTestId"
-          src={hotel.image}
+          src={hotelImg}
           alt="Card image"
         />
         <h4 className="card-title h-100">{hotel.name}</h4>
