@@ -21,7 +21,6 @@ const SingleHotelReviewLayout: FC<hotelReviewProps> = ({
   positive,
 }) => {
   return (
-    // <div className="container-fluid review-container">
     <div
       className={`container-fluid review-container ${
         positive ? `positive` : `negative`
