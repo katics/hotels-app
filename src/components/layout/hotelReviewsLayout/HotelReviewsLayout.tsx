@@ -9,6 +9,7 @@ interface hotelReviewsProps {
 const HotelReviewsLayout: FC<hotelReviewsProps> = ({ hotelReview }) => {
   return (
     <div>
+      User Reviews:
       {hotelReview.length ? (
         hotelReview.map(review => {
           return (
