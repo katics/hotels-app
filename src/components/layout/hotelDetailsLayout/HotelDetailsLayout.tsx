@@ -1,5 +1,7 @@
 import { FC } from "react";
+import { HotelReview } from "../../../utils/types/HotelReview";
 import CustomButton from "../../Button/Button";
+import HotelReviewsLayout from "../hotelReviewsLayout/HotelReviewsLayout";
 
 import "./HotelDetailsLayout.scss";
 interface hotelDetailsProps {
@@ -11,7 +13,9 @@ interface hotelDetailsProps {
   likes: number;
   description: string;
   price: number;
+  reviews: HotelReview[];
   goBack: () => void;
+  loadHotelReviews: () => void;
 }
 const HotelDetailsLayout: FC<hotelDetailsProps> = ({
   name,
@@ -22,7 +26,9 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
   likes,
   description,
   price,
+  reviews,
   goBack,
+  loadHotelReviews,
 }) => {
   return (
     <div className="col-sm-12 col-lg-12">
@@ -65,11 +71,20 @@ const HotelDetailsLayout: FC<hotelDetailsProps> = ({
                 <label className="float-right">{price} RSD</label>
               </div>
             </div>
-            <div className="py-3">
+            <div className="py-3 px-3">
               <CustomButton title="Go Back" handleClick={goBack} />
             </div>
+            {!reviews && (
+              <div className="py-3 px-3">
+                <CustomButton
+                  title="Load reviews"
+                  handleClick={loadHotelReviews}
+                />
+              </div>
+            )}
           </div>
         </div>
+        {reviews && <HotelReviewsLayout hotelReview={reviews} />}
       </div>
     </div>
   );

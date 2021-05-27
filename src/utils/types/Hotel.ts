@@ -1,3 +1,5 @@
+import { HotelReview } from "./HotelReview";
+
 export interface Hotel {
   id: number;
   name: string;
@@ -12,4 +14,5 @@ export interface Hotel {
   dislikes: number;
   user: number[];
   location: string;
+  reviews: HotelReview[];
 }

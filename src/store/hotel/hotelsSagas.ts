@@ -5,12 +5,14 @@ import {
   fetchFavHotelsAPI,
   fetchHotelDetailsAPI,
   fetchHotels,
+  getHotelReviewsAPI,
   toggleFavouritesAPI,
 } from "../../utils/api";
 import {
   addRemoveFavHotel,
   fetchFavHotelsSuccess,
   fetchHotelDetailsSuccess,
+  fetchHotelReviewsSuccess,
   fetchHotelsError,
   fetchHotelsSuccess,
 } from "./hotelActions";
@@ -18,6 +20,7 @@ import {
   FETCH_FAV_HOTELS_REQUEST,
   FETCH_HOTELS_REQUEST,
   FETCH_HOTEL_DETAILS,
+  FETCH_HOTEL_REVIEWS_REQUEST,
   TOGGLE_FAVOURITES_REQUEST,
 } from "./hotelActionTypes";
 
@@ -59,9 +62,19 @@ export function* fetchFavHotels(): any {
   }
 }
 
+export function* fetchHotelReviews(action: any): any {
+  try {
+    const response = yield call(getHotelReviewsAPI, action.payload);
+    yield put(fetchHotelReviewsSuccess(response.data));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export default function* hotelsSagas(): any {
   yield takeLatest(FETCH_HOTELS_REQUEST, fetchHotelsSaga);
   yield takeLatest(FETCH_HOTEL_DETAILS, fetchHotelDetails);
   yield takeLatest(TOGGLE_FAVOURITES_REQUEST, toggleFavourites);
   yield takeLatest(FETCH_FAV_HOTELS_REQUEST, fetchFavHotels);
+  yield takeLatest(FETCH_HOTEL_REVIEWS_REQUEST, fetchHotelReviews);
 }

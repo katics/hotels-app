@@ -14,4 +14,33 @@ export const singleHotel: Hotel = {
   dislikes: 2,
   user: [73, 100],
   location: "44.8170754,20.4580087",
+  reviews: [
+    {
+      id: 5,
+      message:
+        "Everyone was friendly and helpful, it was clean and spacious. The hotel has a great restaurant, which I would recommend.",
+      created_at: "2017-04-13T18:12:25.344124Z",
+      likes: 2,
+      dislikes: 0,
+      positive: true,
+      author: {
+        id: 1,
+        first_name: "Marko",
+        last_name: "Kovacina",
+      },
+    },
+    {
+      id: 6,
+      message: "All in this hotell is about service. Best in Belgrad :)",
+      created_at: "2017-04-13T18:12:46.860839Z",
+      likes: 0,
+      dislikes: 0,
+      positive: false,
+      author: {
+        id: 3,
+        first_name: "Bozidar",
+        last_name: "Zecevic",
+      },
+    },
+  ],
 };

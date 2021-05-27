@@ -4,7 +4,6 @@ import { UserRegistrationData } from "../../../utils/types/UserRegistrationData"
 import FormError from "../../error/Error";
 import FormFieldSet from "../../formFieldSet/FormFieldSet";
 
-import "./RegisterPage";
 import "./RegisterPage.scss";
 
 interface UserRegisterProps {

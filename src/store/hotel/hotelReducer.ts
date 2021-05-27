@@ -9,10 +9,14 @@ import {
   FETCH_HOTELS_SUCCESS,
   FETCH_HOTEL_DETAILS,
   FETCH_HOTEL_DETAILS_SUCCESS,
+  FETCH_HOTEL_REVIEWS_REQUEST,
+  FETCH_HOTEL_REVIEWS_ERROR,
+  FETCH_HOTEL_REVIEWS_SUCCESS,
   RESET_HOTEL_STATE,
 } from "./hotelActionTypes";
 import { Hotels } from "../../utils/types/Hotels";
 import { Hotel } from "../../utils/types/Hotel";
+import { HotelReview } from "../../utils/types/HotelReview";
 
 const initialState: Hotels = {
   listOfHotels: [],
@@ -30,6 +34,7 @@ const initialState: Hotels = {
     dislikes: 0,
     user: [],
     location: "",
+    reviews: [] as HotelReview[],
   },
   favHotels: [],
   isLoading: false,
@@ -100,6 +105,19 @@ const hotel = (state = initialState, action: any = {}): Hotels => {
           action.payload,
           state.isFavouriteFetched
         ),
+      };
+    case FETCH_HOTEL_REVIEWS_REQUEST:
+      return {
+        ...state,
+      };
+    case FETCH_HOTEL_REVIEWS_SUCCESS:
+      return {
+        ...state,
+        hotelDetails: { ...state.hotelDetails, reviews: action.payload },
+      };
+    case FETCH_HOTEL_REVIEWS_ERROR:
+      return {
+        ...state,
       };
     default:
       return state;

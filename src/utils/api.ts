@@ -36,7 +36,6 @@ export const userLogin = (loginData: UserLoginData): any => {
 
 export const registerUser = (registerUserData: UserRegistrationData): any => {
   const { confirmPassword, ...regUserDataApi } = registerUserData;
-  console.log(JSON.stringify(regUserDataApi));
   return axios({
     url: apiUrl + "/register/",
     method: "POST",
@@ -44,6 +43,18 @@ export const registerUser = (registerUserData: UserRegistrationData): any => {
       "Content-Type": "application/json",
     },
     data: JSON.stringify(regUserDataApi),
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+export const getHotelReviewsAPI = (hotelId: number): any => {
+  return axios({
+    url: apiUrl + "/hotel_api/get_hotel_reviews/" + hotelId + "/",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).catch(err => {
     console.log(err);
   });

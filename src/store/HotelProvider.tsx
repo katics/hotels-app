@@ -1,7 +1,6 @@
 import { createContext, FC } from "react";
 import { createDispatchHook, createSelectorHook, Provider } from "react-redux";
 import { AnyAction, Store } from "redux";
-import { Hotel } from "../utils/types/Hotel";
 
 import { Hotels } from "../utils/types/Hotels";
 import { Spinner } from "../utils/types/Spinner";
@@ -10,7 +9,6 @@ import { UserData } from "../utils/types/UserData";
 export interface HotelState {
   hotels: Hotels;
   user: UserData;
-  hotelDetails: Hotel;
   spinner: Spinner;
 }
 

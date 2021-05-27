@@ -1,7 +1,10 @@
 import { FC, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import store from "../../../store";
-import { fetchHotelDetails } from "../../../store/hotel/hotelActions";
+import {
+  fetchHotelDetails,
+  fetchHotelReviews,
+} from "../../../store/hotel/hotelActions";
 import { hotelsSelector } from "../../../store/hotel/hotelSelector";
 import HotelProvider, {
   hotelContext,
@@ -36,6 +39,9 @@ const HotelDetailsPage: FC = () => {
   const goBack = () => {
     history.goBack();
   };
+  const loadHotelReviews = () => {
+    hotelDispatch(fetchHotelReviews(hotelId));
+  };
   return (
     <>
       {isLoading ? (
@@ -50,7 +56,9 @@ const HotelDetailsPage: FC = () => {
           likes={hotelDetails.likes}
           description={hotelDetails.description}
           price={hotelDetails.price}
+          reviews={hotelDetails.reviews}
           goBack={goBack}
+          loadHotelReviews={loadHotelReviews}
         />
       )}
     </>
